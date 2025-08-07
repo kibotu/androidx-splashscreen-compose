@@ -1,4 +1,4 @@
-package net.kibotu.borg.splashscreendecorator.demo.ui.theme
+package net.kibotu.splashscreendecorator.demo.ui.theme
 
 import android.app.Activity
 import android.os.Build

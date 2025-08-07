@@ -27,7 +27,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import net.kibotu.borg.splashscreendecorator.demo.ui.theme.SplashScreenDecoratorTheme
+import net.kibotu.splashscreendecorator.demo.ui.theme.SplashScreenDecoratorTheme
 import kotlin.math.sqrt
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds

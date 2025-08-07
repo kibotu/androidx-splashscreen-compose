@@ -1,4 +1,4 @@
-package net.kibotu.borg.splashscreendecorator.demo.ui.theme
+package net.kibotu.splashscreendecorator.demo.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import net.kibotu.borg.splashscreendecorator.demo.ui.theme.SplashScreenDecoratorTheme
+import net.kibotu.splashscreendecorator.demo.ui.theme.SplashScreenDecoratorTheme
 import net.kibotu.splashscreen.SplashScreenDecorator
 import net.kibotu.splashscreen.splash
 import kotlin.time.Duration.Companion.milliseconds

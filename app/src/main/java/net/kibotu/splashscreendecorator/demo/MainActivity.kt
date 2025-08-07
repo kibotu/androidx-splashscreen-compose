@@ -12,11 +12,38 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import net.kibotu.borg.splashscreendecorator.demo.ui.theme.SplashScreenDecoratorTheme
+import net.kibotu.splashscreen.SplashScreenDecorator
+import net.kibotu.splashscreen.splash
+import kotlin.time.Duration.Companion.milliseconds
 
 class MainActivity : ComponentActivity() {
+
+    var splashScreen: SplashScreenDecorator? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val exitAnimationDuration = 600L
+        val composeViewFadeDurationOffset = 200L
+
+        splashScreen = splash {
+            this.exitAnimationDuration = exitAnimationDuration
+            this.composeViewFadeDurationOffset = composeViewFadeDurationOffset
+            content {
+                SplashScreenDecoratorTheme {
+                    HeartBeatAnimation(
+                        isVisible = isVisible.value,
+                        exitAnimationDuration = exitAnimationDuration.milliseconds,
+                        onStartExitAnimation = { startExitAnimation() }
+                    )
+                }
+            }
+        }
+
+        splashScreen?.shouldKeepOnScreen = false
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             SplashScreenDecoratorTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -27,6 +54,16 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        splashScreen?.dismiss()
+    }
+
+    override fun onDestroy() {
+        splashScreen = null
+        super.onDestroy()
     }
 }
 

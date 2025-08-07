@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+
+    <aapt:attr name="android:drawable">
+
+        <vector
+            android:name="vector"
+            android:width="108dp"
+            android:height="108dp"
+            android:viewportWidth="108"
+            android:viewportHeight="108">
+
+            <group
+                android:name="circle"
+                android:pivotX="54"
+                android:pivotY="54">
+                <path
+                    android:pathData="M54,22C71.67,22 86,36.33 86,54C86,71.67 71.67,86 54,86C36.33,86 22,71.67 22,54C22,36.33 36.33,22 54,22Z"
+                    android:strokeWidth="1"
+                    android:fillColor="#063773"
+                    android:fillType="nonZero"
+                    android:strokeColor="#00000000" />
+            </group>
+
+            <group
+                android:name="profis_text"
+                android:pivotX="54"
+                android:pivotY="54">
+                <path
+                    android:pathData="M31.19,54.07L31.19,54.07C30.34,54.07 29.47,54.06 28.89,53.81C28.59,53.69 28.39,53.52 28.24,53.29C28.08,53.03 28,52.7 28,52.27C28,51.94 28.05,51.56 28.14,51.13C28.16,51.03 28.66,48.74 28.69,48.62C28.83,48.14 28.99,47.75 29.2,47.41C29.57,46.85 30.05,46.48 30.73,46.26C31.3,46.08 32.02,46 33.06,46L33.07,46C33.62,46 34.07,46.04 34.45,46.12C34.9,46.21 35.24,46.36 35.47,46.56C35.64,46.72 35.74,46.9 35.79,47.12C35.82,47.23 35.83,47.35 35.83,47.48C35.83,47.79 35.76,48.11 35.71,48.36C35.71,48.4 35.7,48.44 35.69,48.47L35.69,48.48L33.66,48.48L33.67,48.47C33.67,48.47 33.67,48.41 33.68,48.38C33.68,48.38 33.68,48.3 33.68,48.18C33.68,48.01 33.6,47.87 33.43,47.77C33.3,47.69 33.13,47.67 32.96,47.65C32.79,47.63 32.59,47.63 32.41,47.63C32.07,47.63 31.81,47.65 31.6,47.71C31.43,47.75 31.29,47.82 31.17,47.91C31.01,48.03 30.87,48.21 30.77,48.46C30.68,48.68 30.61,48.96 30.54,49.29L30.27,50.58C30.18,50.99 30.11,51.3 30.11,51.58C30.11,51.73 30.14,51.85 30.18,51.96C30.25,52.14 30.41,52.27 30.61,52.34C30.81,52.42 31.06,52.45 31.43,52.45C31.67,52.45 31.88,52.44 32.06,52.42C32.37,52.39 32.6,52.29 32.77,52.13C32.96,51.95 33.08,51.69 33.16,51.31L33.19,51.18L35.19,51.18L35.19,51.19C35.19,51.2 35.08,51.72 35.02,51.93C34.96,52.15 34.89,52.33 34.82,52.49C34.62,52.91 34.35,53.23 33.97,53.5C33.59,53.76 33.19,53.92 32.71,54C32.3,54.07 31.87,54.08 31.4,54.08C31.4,54.08 31.22,54.07 31.19,54.07L31.19,54.07Z"
+                    android:strokeWidth="1"
+                    android:fillColor="#FFFFFF"
+                    android:fillType="nonZero"
+                    android:strokeColor="#00000000" />
+                <path
+                    android:pathData="M53.78,54.08C52.94,54.08 52.06,54.06 51.48,53.82C51.18,53.69 50.98,53.52 50.83,53.29C50.67,53.03 50.59,52.7 50.59,52.27C50.59,51.95 50.64,51.57 50.73,51.13C50.75,51.03 51.25,48.74 51.29,48.62C51.42,48.14 51.58,47.75 51.8,47.42C52.16,46.85 52.65,46.48 53.32,46.26C53.89,46.08 54.61,46 55.65,46L55.66,46C56.21,46 56.66,46.04 57.04,46.12C57.49,46.21 57.83,46.36 58.06,46.56C58.23,46.72 58.34,46.91 58.38,47.12C58.41,47.23 58.42,47.35 58.42,47.48C58.42,47.79 58.35,48.11 58.3,48.37C58.3,48.4 58.29,48.44 58.28,48.47L58.28,48.49L56.26,48.49L56.26,48.47C56.26,48.47 56.26,48.41 56.27,48.38C56.27,48.38 56.28,48.3 56.28,48.19C56.28,48.01 56.19,47.88 56.03,47.77C55.89,47.7 55.72,47.67 55.56,47.65C55.38,47.63 55.19,47.63 55,47.63C54.66,47.63 54.4,47.65 54.19,47.71C54.02,47.76 53.88,47.82 53.76,47.91C53.6,48.03 53.47,48.21 53.37,48.46C53.27,48.69 53.2,48.96 53.13,49.3L52.85,50.58C52.76,50.99 52.7,51.31 52.7,51.58C52.7,51.73 52.72,51.85 52.77,51.96C52.84,52.14 52.99,52.27 53.2,52.35C53.4,52.42 53.65,52.45 54.02,52.45C54.26,52.45 54.46,52.44 54.64,52.42C54.96,52.39 55.19,52.29 55.36,52.13C55.54,51.95 55.67,51.69 55.75,51.31L55.78,51.18L57.78,51.18L57.78,51.19C57.78,51.2 57.67,51.72 57.61,51.93C57.55,52.15 57.48,52.33 57.4,52.49C57.21,52.91 56.94,53.23 56.55,53.5C56.18,53.76 55.78,53.92 55.3,54C54.88,54.07 53.81,54.08 53.78,54.08L53.78,54.08Z"
+                    android:strokeWidth="1"
+                    android:fillColor="#FFFFFF"
+                    android:fillType="nonZero"
+                    android:strokeColor="#00000000" />
+                <path
+                    android:pathData="M49.51,54.08L43.65,54.08L43.65,54.06L45.29,46.4C45.32,46.26 45.38,46.17 45.46,46.1C45.55,46.03 45.67,46 45.83,46L50.77,46C50.9,46 50.98,46.03 51.04,46.08C51.07,46.12 51.1,46.18 51.1,46.25L51.1,46.26C51.1,46.29 51.09,46.32 51.09,46.35L50.83,47.54L47.01,47.54L46.68,49.13L50.27,49.13L49.94,50.62L46.35,50.62L45.94,52.53L49.84,52.53L49.51,54.08Z"
+                    android:strokeWidth="1"
+                    android:fillColor="#FFFFFF"
+                    android:fillType="nonZero"
+                    android:strokeColor="#00000000" />
+                <path
+                    android:pathData="M59.82,54.08L57.91,54.08L57.92,54.06L59.51,46.43C59.55,46.26 59.61,46.15 59.7,46.08C59.77,46.03 59.86,46 59.98,46L61.11,46C61.23,46 61.32,46.03 61.38,46.08C61.42,46.13 61.45,46.19 61.45,46.27C61.45,46.29 61.44,46.32 61.44,46.34L59.82,54.08Z"
+                    android:strokeWidth="1"
+                    android:fillColor="#FFFFFF"
+                    android:fillType="nonZero"
+                    android:strokeColor="#00000000" />
+                <path
+                    android:pathData="M65.3,54.08L62.8,54.08L62.79,54.07L60.94,49.88L60.95,49.87L64.15,46.47C64.35,46.26 64.47,46.16 64.57,46.09C64.68,46.02 64.78,46 64.94,46L66.56,46C66.63,46 66.68,46.02 66.71,46.05C66.72,46.06 66.73,46.07 66.74,46.08C66.74,46.09 66.75,46.1 66.75,46.12L66.75,46.14C66.75,46.18 66.73,46.23 66.66,46.3L63.2,49.94L65.3,54.08Z"
+                    android:strokeWidth="1"
+                    android:fillColor="#FFFFFF"
+                    android:fillType="nonZero"
+                    android:strokeColor="#00000000" />
+                <path
+                    android:pathData="M40.59,54.08L40.57,54.08L40.58,54.06L41.27,50.8L38.08,50.8L37.38,54.08L35.45,54.08L35.45,54.06C35.52,53.75 37.05,46.48 37.06,46.44C37.12,46.2 37.22,46.11 37.29,46.07C37.38,46.02 37.49,46 37.65,46L38.7,46C38.75,46 38.84,46.02 38.91,46.07C38.95,46.1 38.98,46.13 38.99,46.16C39.02,46.2 39.03,46.24 39.03,46.29C39.03,46.32 39.02,46.34 39.02,46.36C39.01,46.41 38.48,48.9 38.43,49.14L41.62,49.14C41.88,47.92 42.19,46.45 42.19,46.44C42.25,46.2 42.35,46.11 42.42,46.07C42.51,46.02 42.62,46 42.78,46L43.83,46C43.88,46 43.97,46.02 44.04,46.07C44.08,46.1 44.11,46.13 44.12,46.16C44.14,46.2 44.16,46.24 44.16,46.29C44.16,46.32 44.15,46.34 44.15,46.36C44.14,46.41 42.58,53.75 42.51,54.07L42.51,54.08L40.59,54.08Z"
+                    android:strokeWidth="1"
+                    android:fillColor="#FFFFFF"
+                    android:fillType="nonZero"
+                    android:strokeColor="#00000000" />
+                <path
+                    android:pathData="M71.03,47.63C71.18,47.66 71.3,47.74 71.36,47.86C71.4,47.94 71.42,48.04 71.42,48.15C71.42,48.27 71.4,48.41 71.37,48.57C71.32,48.78 71.28,48.95 71.21,49.1C71.14,49.25 71.05,49.37 70.91,49.48C70.64,49.69 70.22,49.81 69.48,49.98C68.49,50.19 67.81,50.37 67.33,50.6C66.85,50.84 66.57,51.12 66.36,51.56C66.22,51.86 66.12,52.22 66.02,52.69L65.74,54.08L72.12,54.08L72.42,52.67L67.98,52.67C67.98,52.67 68.05,52.33 68.1,52.21C68.18,52.05 68.27,51.93 68.4,51.84C68.52,51.75 68.67,51.69 68.85,51.64C69.22,51.54 69.72,51.48 70.46,51.29C71.38,51.06 71.99,50.81 72.43,50.4C72.86,49.99 73.13,49.41 73.32,48.51C73.4,48.17 73.44,47.84 73.44,47.59C73.44,47.24 73.37,46.96 73.24,46.75C73.11,46.54 72.93,46.39 72.69,46.28C72.22,46.05 71.52,46 70.7,46C69.65,46 68.82,46.11 68.21,46.48C67.59,46.85 67.16,47.52 66.92,48.61L66.86,48.92L68.8,48.92L68.88,48.58C68.95,48.25 69.02,48.03 69.15,47.87C69.27,47.71 69.46,47.63 69.71,47.6C69.87,47.58 70.07,47.58 70.32,47.58L70.44,47.58C70.68,47.58 70.87,47.59 71.03,47.63L71.03,47.63Z"
+                    android:strokeWidth="1"
+                    android:fillColor="#FFFFFF"
+                    android:fillType="nonZero"
+                    android:strokeColor="#00000000" />
+                <path
+                    android:pathData="M76.45,46.85C76.23,47.08 74.34,49.03 73.57,49.82C73.41,49.99 73.25,50.17 73.18,50.32C73.12,50.42 73.04,50.73 73,50.94C72.92,51.39 72.86,51.8 72.82,51.97C72.81,52.01 72.81,52.05 72.81,52.08C72.81,52.22 72.87,52.31 72.94,52.38C73.02,52.45 73.13,52.48 73.23,52.48L76.98,52.48L76.63,54.08L78.61,53.89L78.91,52.47L79.62,52.47L79.92,51.05L79.22,51.05C79.22,51.05 79.92,47.82 79.94,47.7C80.19,46.38 79.63,46 78.39,46C78.07,46.01 77.35,45.94 76.45,46.85L76.45,46.85ZM77.28,51.06L74.45,51.06L77.82,47.63L78.03,47.63L77.28,51.06Z"
+                    android:strokeWidth="1"
+                    android:fillColor="#FFFFFF"
+                    android:fillType="nonZero"
+                    android:strokeColor="#00000000" />
+                <path
+                    android:pathData="M71.96,58.62C70.69,58.62 69.47,58.29 68.42,57.66C67.4,57.04 66.81,56.32 66.52,55.91L66.15,56.84C66.12,56.93 66.03,56.98 65.93,56.97C65.83,56.95 65.76,56.87 65.76,56.77L65.74,54.94L65.74,54.93C65.74,54.88 65.76,54.83 65.8,54.8C65.84,54.76 65.89,54.74 65.94,54.74L67.86,54.74L67.86,54.74C67.95,54.74 68.03,54.81 68.05,54.9C68.05,54.91 68.06,54.92 68.06,54.94C68.06,55.02 68,55.09 67.93,55.12L66.99,55.48C67.81,56.19 69.5,57.33 71.86,57.33C72.07,57.33 72.27,57.33 72.47,57.31C73.47,57.23 74.48,56.99 75.39,56.62C76.18,56.29 76.88,55.88 77.42,55.42L76.46,55.14C76.37,55.11 76.31,55.04 76.31,54.95C76.31,54.94 76.31,54.94 76.31,54.93C76.32,54.84 76.4,54.76 76.49,54.75L78.36,54.59C78.37,54.59 78.38,54.58 78.38,54.58C78.43,54.58 78.48,54.6 78.51,54.63C78.55,54.66 78.58,54.71 78.58,54.76C78.74,56.56 78.74,56.56 78.74,56.56C78.74,56.65 78.68,56.73 78.59,56.76C78.57,56.76 78.55,56.76 78.53,56.76C78.46,56.76 78.38,56.72 78.35,56.65L77.9,55.81C77.54,56.29 76.91,56.96 75.92,57.55C74.92,58.14 73.8,58.49 72.6,58.59L72.48,58.6C72.31,58.62 72.13,58.62 71.96,58.62L71.96,58.62Z"
+                    android:strokeWidth="1"
+                    android:fillColor="#FFFFFF"
+                    android:fillType="nonZero"
+                    android:strokeColor="#00000000" />
+                <path
+                    android:pathData="M29.01,57.38C29.5,57.3 30.13,57.23 30.94,57.23C31.93,57.23 32.66,57.46 33.12,57.88C33.55,58.25 33.81,58.81 33.81,59.5C33.81,60.21 33.6,60.76 33.2,61.16C32.67,61.73 31.81,62.02 30.82,62.02C30.52,62.02 30.25,62 30.02,61.95L30.02,65.06L29.01,65.06L29.01,57.38ZM30.02,61.13C30.23,61.19 30.51,61.21 30.85,61.21C32.06,61.21 32.8,60.62 32.8,59.55C32.8,58.52 32.07,58.03 30.96,58.03C30.52,58.03 30.19,58.06 30.02,58.11L30.02,61.13Z"
+                    android:strokeWidth="1"
+                    android:fillColor="#FFFFFF"
+                    android:fillType="nonZero"
+                    android:strokeColor="#00000000" />
+                <path
+                    android:pathData="M34.73,61.32C34.73,60.68 34.72,60.13 34.69,59.63L35.57,59.63L35.6,60.69L35.65,60.69C35.9,59.96 36.51,59.5 37.18,59.5C37.3,59.5 37.37,59.52 37.47,59.54L37.47,60.47C37.36,60.45 37.26,60.44 37.12,60.44C36.41,60.44 35.91,60.96 35.77,61.7C35.75,61.84 35.73,62 35.73,62.16L35.73,65.06L34.73,65.06L34.73,61.32Z"
+                    android:strokeWidth="1"
+                    android:fillColor="#FFFFFF"
+                    android:fillType="nonZero"
+                    android:strokeColor="#00000000" />
+                <path
+                    android:pathData="M43.4,62.24C43.4,64.29 41.98,65.18 40.63,65.18C39.13,65.18 37.97,64.08 37.97,62.33C37.97,60.47 39.19,59.38 40.72,59.38C42.32,59.38 43.4,60.54 43.4,62.24L43.4,62.24ZM38.99,62.29C38.99,63.51 39.69,64.43 40.68,64.43C41.64,64.43 42.37,63.52 42.37,62.27C42.37,61.33 41.9,60.14 40.7,60.14C39.51,60.14 38.99,61.24 38.99,62.29Z"
+                    android:strokeWidth="1"
+                    android:fillColor="#FFFFFF"
+                    android:fillType="nonZero"
+                    android:strokeColor="#00000000" />
+                <path
+                    android:pathData="M44.82,65.06L44.82,60.31L44.03,60.31L44.03,59.55L44.82,59.55L44.82,59.26C44.82,57.8 45.69,56.85 47.26,56.85C47.78,56.85 48.39,57.01 48.68,57.22L48.39,57.98C48.15,57.81 47.71,57.66 47.21,57.66C46.14,57.66 45.82,58.4 45.82,59.28L45.82,59.55L49.08,59.55L49.08,65.06L48.07,65.06L48.07,60.31L45.82,60.31L45.82,65.06L44.82,65.06L44.82,65.06Z"
+                    android:strokeWidth="1"
+                    android:fillColor="#FFFFFF"
+                    android:fillType="nonZero"
+                    android:strokeColor="#00000000" />
+                <path
+                    android:pathData="M50.6,64.03C50.91,64.23 51.46,64.44 51.99,64.44C52.75,64.44 53.11,64.07 53.11,63.61C53.11,63.13 52.81,62.86 52.04,62.59C51,62.23 50.51,61.68 50.51,61.01C50.51,60.11 51.26,59.38 52.5,59.38C53.09,59.38 53.6,59.54 53.92,59.72L53.66,60.46C53.43,60.32 53.02,60.14 52.48,60.14C51.86,60.14 51.51,60.48 51.51,60.9C51.51,61.36 51.86,61.56 52.61,61.84C53.61,62.21 54.13,62.69 54.13,63.52C54.13,64.5 53.34,65.18 51.96,65.18C51.33,65.18 50.75,65.04 50.34,64.8L50.6,64.03Z"
+                    android:strokeWidth="1"
+                    android:fillColor="#FFFFFF"
+                    android:fillType="nonZero"
+                    android:strokeColor="#00000000" />
+
+            </group>
+
+            <group
+                android:name="circle_segment_top_left"
+                android:pivotX="54"
+                android:pivotY="54">
+
+                <path
+                    android:name="circle_segment_path_top_left"
+                    android:fillAlpha="0"
+                    android:fillColor="#1980D0"
+                    android:fillType="nonZero"
+                    android:pathData="M31.76,35.39L29.58,33.55C35.13,26.84 43.45,22.65 52.65,22.65C54.52,22.65 56.35,22.82 58.13,23.14L57.64,26.02C56.01,25.72 54.34,25.57 52.65,25.57C44.37,25.57 36.81,29.16 31.76,35.39Z"
+                    android:strokeWidth="1"
+                    android:strokeColor="#00000000" />
+            </group>
+
+            <group
+                android:name="circle_segment_bottom_right"
+                android:pivotX="54"
+                android:pivotY="54">
+
+                <path
+                    android:name="circle_segment_path_bottom_right"
+                    android:fillAlpha="0"
+                    android:fillColor="#1980D0"
+                    android:fillType="nonZero"
+                    android:pathData="M76.24,72.61L78.42,74.45C72.87,81.16 64.55,85.35 55.35,85.35C53.48,85.35 51.65,85.18 49.87,84.86L50.36,81.98C51.99,82.28 53.66,82.43 55.35,82.43C63.63,82.43 71.19,78.84 76.24,72.61Z"
+                    android:strokeWidth="1"
+                    android:strokeColor="#00000000" />
+            </group>
+
+        </vector>
+
+    </aapt:attr>
+
+    <!-- https://developer.android.com/reference/android/graphics/drawable/AnimatedVectorDrawable   -->
+    <target android:name="circle">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="3313"
+                    android:interpolator="@android:anim/linear_interpolator"
+                    android:propertyName="rotation"
+                    android:repeatCount="-1"
+                    android:repeatMode="restart"
+                    android:valueFrom="0"
+                    android:valueTo="360"
+                    android:valueType="floatType" />
+                <objectAnimator
+                    android:duration="90"
+                    android:propertyName="scaleX"
+                    android:repeatCount="-1"
+                    android:repeatMode="reverse"
+                    android:valueFrom="0.996"
+                    android:valueTo="1.0" />
+                <objectAnimator
+                    android:duration="90"
+                    android:propertyName="scaleY"
+                    android:repeatCount="-1"
+                    android:repeatMode="reverse"
+                    android:valueFrom="1.0"
+                    android:valueTo="0.996" />
+            </set>
+        </aapt:attr>
+    </target>
+
+    <!-- Added scaling animation for the text to match circle scaling -->
+    <target android:name="profis_text">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="0"
+                    android:propertyName="scaleX"
+                    android:repeatMode="reverse"
+                    android:valueFrom="0.9"
+                    android:valueTo="0.9" />
+                <objectAnimator
+                    android:duration="0"
+                    android:propertyName="scaleY"
+                    android:repeatMode="reverse"
+                    android:valueFrom="0.9"
+                    android:valueTo="0.9" />
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target android:name="circle_segment_top_left">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="1656"
+                    android:interpolator="@android:interpolator/accelerate_decelerate"
+                    android:propertyName="rotation"
+                    android:repeatCount="-1"
+                    android:repeatMode="restart"
+                    android:valueFrom="0"
+                    android:valueTo="360"
+                    android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target android:name="circle_segment_path_top_left">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="1656"
+                    android:interpolator="@android:anim/linear_interpolator"
+                    android:propertyName="fillAlpha"
+                    android:repeatCount="-1"
+                    android:repeatMode="reverse"
+                    android:valueFrom="0.1f"
+                    android:valueTo="0.75f"
+                    android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target android:name="circle_segment_bottom_right">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="1656"
+                    android:interpolator="@android:interpolator/accelerate_decelerate"
+                    android:propertyName="rotation"
+                    android:repeatCount="-1"
+                    android:repeatMode="restart"
+                    android:startOffset="828"
+                    android:valueFrom="130"
+                    android:valueTo="490"
+                    android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target android:name="circle_segment_path_bottom_right">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="1656"
+                    android:interpolator="@android:anim/linear_interpolator"
+                    android:propertyName="fillAlpha"
+                    android:repeatCount="-1"
+                    android:repeatMode="reverse"
+                    android:valueFrom="0.1f"
+                    android:valueTo="0.75f"
+                    android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+
+</animated-vector>

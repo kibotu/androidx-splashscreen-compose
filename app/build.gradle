@@ -60,8 +60,11 @@ android {
 dependencies {
     coreLibraryDesugaring getLibrary("com.android.tools:desugar_jdk_libs")
 
+    implementation getLibrary("com.google.android.material:material")
     implementation getLibrary("androidx.core:core-splashscreen")
     implementation project(":splashscreen-compose")
+
+    implementation getLibrary("androidx.compose.runtime:runtime")
 
     // AndroidX
     implementation getLibrary("androidx.core:core-ktx")

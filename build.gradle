@@ -1,0 +1,29 @@
+
+buildscript {
+
+    apply from: "./dependencies.gradle"
+
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        maven { url 'https://jitpack.io' }
+    }
+
+    dependencies {
+        classpath getPluginLibrary("com.android.tools.build:gradle")
+        classpath getPluginLibrary("org.jetbrains.kotlin:kotlin-gradle-plugin")
+        classpath getPluginLibrary("com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin")
+        classpath getPluginLibrary("com.vanniktech:gradle-maven-publish-plugin")
+        classpath getPluginLibrary("org.jetbrains.kotlin:compose-compiler-gradle-plugin")
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        maven { url 'https://jitpack.io' }
+    }
+}

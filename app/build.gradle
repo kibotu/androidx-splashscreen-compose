@@ -1,0 +1,80 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.kotlin.plugin.compose'
+apply plugin: 'com.google.devtools.ksp'
+
+android {
+    namespace 'net.kibotu.splashscreendecorator.demo'
+    compileSdk compileSdkVer
+    buildToolsVersion = buildToolsVer
+
+    defaultConfig {
+        applicationId 'net.kibotu.splashscreendecorator.demo'
+        minSdk minSdkVer
+        targetSdk targetSdkVer
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // region java compile options
+
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(17))
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // endregion
+
+    // region kotlin compile options
+
+    kotlinOptions {
+        jvmTarget = "17"
+        allWarningsAsErrors = false
+        kotlinOptions.verbose = true
+        freeCompilerArgs += [
+                "-Xjvm-default=all-compatibility"
+        ]
+    }
+
+    // endregion
+    buildFeatures {
+        compose true
+    }
+}
+
+dependencies {
+    coreLibraryDesugaring getLibrary("com.android.tools:desugar_jdk_libs")
+
+    implementation getLibrary("androidx.core:core-splashscreen")
+    implementation project(":splashscreen-compose")
+
+    // AndroidX
+    implementation getLibrary("androidx.core:core-ktx")
+    implementation getLibrary("androidx.lifecycle:lifecycle-runtime-ktx")
+    implementation getLibrary("androidx.activity:activity-compose")
+
+    // Compose
+    implementation platform(getLibrary("androidx.compose:compose-bom"))
+    implementation getLibrary("androidx.compose.ui:ui")
+    implementation getLibrary("androidx.compose.ui:ui-graphics")
+    implementation getLibrary("androidx.compose.ui:ui-tooling-preview")
+    implementation getLibrary("androidx.compose.material3:material3")
+    debugImplementation getLibrary("androidx.compose.ui:ui-tooling")
+    debugImplementation getLibrary("androidx.compose.ui:ui-test-manifest")
+}
+

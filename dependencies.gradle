@@ -1,0 +1,77 @@
+ext {
+    // refresh gradle dependencies: ./gradlew build --refresh-dependencies
+    minSdkVer = 21
+
+    compileSdkVer = 36
+    buildToolsVer = "36.0.0"
+    targetSdkVer = 36
+
+    // @see https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8
+    kotlinVersion = "2.2.0"
+
+    isJitpack = System.getenv("JITPACK") == "true"
+
+    println "Compile Version: $compileSdkVer"
+    println "Min SDK Version: $minSdkVer"
+    println "Target SDK Version: $targetSdkVer"
+    println "Kotlin: $kotlinVersion"
+    println "Version Name: $version"
+
+    plugins = [
+            "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin": "$kotlinVersion-2.0.2",
+            "com.vanniktech:gradle-maven-publish-plugin"                   : "0.30.0",
+            "com.android.tools.build:gradle"                               : "8.12.0",
+            "org.jetbrains.kotlin:kotlin-gradle-plugin"                    : "$kotlinVersion",
+            "org.jetbrains.kotlin:compose-compiler-gradle-plugin"          : "$kotlinVersion"
+    ]
+
+    libs = [
+            // AndroidX
+            "androidx.core:core-ktx"                  : "1.16.0",
+            "androidx.lifecycle:lifecycle-runtime-ktx": "2.9.2",
+            "androidx.activity:activity-compose"      : "1.10.1",
+
+            // Compose
+            "androidx.compose:compose-bom"            : "2025.07.00",
+            "androidx.compose.ui:ui"                  : "",
+            "androidx.compose.ui:ui-graphics"         : "",
+            "androidx.compose.runtime:runtime"        : "",
+            "androidx.compose.ui:ui-tooling-preview"  : "",
+            "androidx.compose.material3:material3"    : "",
+            "androidx.compose.ui:ui-tooling"          : "",
+            "androidx.compose.ui:ui-test-manifest"    : "",
+            "androidx.compose.ui:ui-test-junit4"      : "",
+
+            // Support Libraries
+            "androidx.appcompat:appcompat"            : "1.7.0",
+            "com.google.android.material:material"    : "1.12.0",
+
+            // Androidx SplashScreen
+            // https://mvnrepository.com/artifact/androidx.core/core-splashscreen?repo=google
+            // https://maven.google.com/web/index.html?q=androidx.core#androidx.core:core-splashscreen
+            "androidx.core:core-splashscreen"         : "1.2.0-rc01",
+    ]
+
+    desugaring = [
+            "com.android.tools:desugar_jdk_libs": "2.1.5"
+    ]
+
+    LIBRARIES = libs + desugaring
+
+    getLibraryFromMap = { Map<String, String> map, String lib ->
+        Map.Entry<String, String> libData = map.find { Map.Entry<String, String> entry -> entry["key"] == lib }
+
+        def key = libData?.key
+        def value = libData?.value
+
+        return (value && value.toString().trim()) ? "${key}:${value}" : "${key}"
+    }
+
+    getLibrary = { String lib ->
+        getLibraryFromMap(LIBRARIES, lib)
+    }
+
+    getPluginLibrary = { String lib ->
+        getLibraryFromMap(plugins, lib)
+    }
+}

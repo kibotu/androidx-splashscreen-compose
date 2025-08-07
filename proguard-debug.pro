@@ -1,0 +1,4 @@
+-verbose
+-dontobfuscate
+#-dontshrink
+#-dontoptimize

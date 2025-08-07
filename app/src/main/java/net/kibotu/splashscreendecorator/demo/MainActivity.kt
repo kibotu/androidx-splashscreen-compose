@@ -11,10 +11,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import net.kibotu.splashscreendecorator.demo.ui.theme.SplashScreenDecoratorTheme
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import net.kibotu.splashscreen.SplashScreenDecorator
 import net.kibotu.splashscreen.splash
+import net.kibotu.splashscreendecorator.demo.ui.theme.SplashScreenDecoratorTheme
 import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 
 class MainActivity : ComponentActivity() {
 
@@ -22,24 +26,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        val exitAnimationDuration = 600L
-        val composeViewFadeDurationOffset = 200L
-
-        splashScreen = splash {
-            this.exitAnimationDuration = exitAnimationDuration
-            this.composeViewFadeDurationOffset = composeViewFadeDurationOffset
-            content {
-                SplashScreenDecoratorTheme {
-                    HeartBeatAnimation(
-                        isVisible = isVisible.value,
-                        exitAnimationDuration = exitAnimationDuration.milliseconds,
-                        onStartExitAnimation = { startExitAnimation() }
-                    )
-                }
-            }
-        }
-
-        splashScreen?.shouldKeepOnScreen = false
+        startSplash()
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -56,9 +43,32 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        splashScreen?.dismiss()
+    private fun startSplash() {
+
+        val exitAnimationDuration = 600L
+        val composeViewFadeDurationOffset = 200L
+
+        splashScreen = splash {
+            this.exitAnimationDuration = exitAnimationDuration
+            this.composeViewFadeDurationOffset = composeViewFadeDurationOffset
+            content {
+                SplashScreenDecoratorTheme {
+                    HeartBeatAnimation(
+                        isVisible = this@content.isVisible.value,
+                        exitAnimationDuration = exitAnimationDuration.milliseconds,
+                        onStartExitAnimation = { this@content.startExitAnimation() }
+                    )
+                }
+            }
+        }
+
+        // delay os splash screen for demonstration purposes
+        lifecycleScope.launch {
+            delay(2.seconds)
+            splashScreen?.shouldKeepOnScreen = false
+            delay(5.seconds)
+            splashScreen?.dismiss()
+        }
     }
 
     override fun onDestroy() {

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.kotlin.plugin.compose'
 
 android {
     namespace 'net.kibotu.splashscreen'
@@ -65,6 +66,10 @@ android {
     }
 
     // endregion
+
+    buildFeatures {
+        compose true
+    }
 }
 
 dependencies {
@@ -73,9 +78,9 @@ dependencies {
     implementation getLibrary("androidx.compose.ui:ui")
     implementation getLibrary("androidx.compose.runtime:runtime")
     implementation getLibrary("androidx.core:core-splashscreen")
-    implementation "androidx.compose.animation:animation"
-    implementation "androidx.compose.animation:animation-graphics"
-    implementation "androidx.core:core-ktx:1.16.0"
+    implementation getLibrary("androidx.compose.animation:animation")
+    implementation getLibrary("androidx.compose.animation:animation-graphics")
+    implementation getLibrary("androidx.core:core-ktx")
 }
 
 if (!isJitpack) {

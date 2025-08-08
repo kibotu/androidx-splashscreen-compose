@@ -76,11 +76,7 @@ dependencies {
     coreLibraryDesugaring getLibrary("com.android.tools:desugar_jdk_libs")
     implementation platform(getLibrary("androidx.compose:compose-bom"))
     implementation getLibrary("androidx.compose.ui:ui")
-    implementation getLibrary("androidx.compose.runtime:runtime")
     implementation getLibrary("androidx.core:core-splashscreen")
-    implementation getLibrary("androidx.compose.animation:animation")
-    implementation getLibrary("androidx.compose.animation:animation-graphics")
-    implementation getLibrary("androidx.core:core-ktx")
 
     // Testing dependencies
     testImplementation getLibrary("junit:junit")
@@ -88,16 +84,8 @@ dependencies {
     testImplementation getLibrary("org.mockito.kotlin:mockito-kotlin")
     testImplementation getLibrary("org.jetbrains.kotlinx:kotlinx-coroutines-test")
     testImplementation getLibrary("androidx.compose.ui:ui-test-junit4")
-    
-    // Android instrumentation test dependencies
-    androidTestImplementation getLibrary("androidx.test.ext:junit")
-    androidTestImplementation getLibrary("androidx.test.espresso:espresso-core")
-    androidTestImplementation getLibrary("androidx.compose.ui:ui-test-junit4")
-    androidTestImplementation getLibrary("androidx.test:rules")
-    androidTestImplementation getLibrary("androidx.test:runner")
-    debugImplementation getLibrary("androidx.compose.ui:ui-test-manifest")
 
-    androidTestImplementation getLibrary("androidx.compose.material3:material3")
+    debugImplementation getLibrary("androidx.compose.ui:ui-test-manifest")
 }
 
 if (!isJitpack) {

@@ -111,10 +111,13 @@ class MainActivity : ComponentActivity() {
         splashScreen = splash {
             content {
                 // Your custom Compose content
-                PulsingLogo(
-                    isVisible = isVisible.value,
-                    onAnimationComplete = { startExitAnimation() }
-                )
+                SplashScreenDecoratorTheme {
+                    HeartBeatAnimation(
+                        isVisible = isVisible.value,
+                        exitAnimationDuration = exitAnimationDuration.milliseconds,
+                        onStartExitAnimation = { startExitAnimation() }
+                    )
+                }
             }
         }
         // start your own splash screen animation
@@ -129,58 +132,15 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    override onResume() {
-        super.onResume()
+    override onStart() {
+        super.onStart()
+
+        // trigger your custom splash animation
         splashScreen?.dismiss()
-        splashScreen = null
     }
 }
 ```
 
-### 2. Custom Animation Example
-
-```kotlin
-@Composable
-fun PulsingLogo(
-    isVisible: Boolean,
-    onAnimationComplete: () -> Unit
-) {
-    var startExit by remember { mutableStateOf(false) }
-    
-    // Handle exit animation trigger
-    LaunchedEffect(isVisible) {
-        if (!isVisible) {
-            startExit = true
-            delay(600) // Wait for animation
-            onAnimationComplete()
-        }
-    }
-    
-    // Pulsing animation
-    val scale by animateFloatAsState(
-        targetValue = if (startExit) 0f else 1f,
-        animationSpec = tween(600),
-        label = "logoScale"
-    )
-    
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Icon(
-            imageVector = Icons.Default.Star,
-            contentDescription = null,
-            modifier = Modifier
-                .size(120.dp)
-                .graphicsLayer {
-                    scaleX = scale
-                    scaleY = scale
-                },
-            tint = MaterialTheme.colorScheme.primary
-        )
-    }
-}
-```
 
 ### 3. Advanced Configuration
 

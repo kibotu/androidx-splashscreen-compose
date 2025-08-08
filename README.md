@@ -39,7 +39,7 @@ implementation 'net.kibotu:androidx-splashscreen-compose:{latest-version}'
 ```kotlin
 class MainActivity : ComponentActivity() {
     
-    private var splashScreen: SplashScreenCompose? = null
+    private var splashScreen: SplashScreenDecorator? = null
     
     override fun onCreate(savedInstanceState: Bundle?) {
         // Initialize before super.onCreate()

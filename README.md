@@ -1,8 +1,8 @@
-# SplashScreenDecorator 🎨
+# androidx-splashscreen-compose 🎨
 
-[![Maven Central Version](https://img.shields.io/maven-central/v/net.kibotu/SplashScreenDecorator)](https://central.sonatype.com/artifact/net.kibotu/SplashScreenDecorator)
-[![](https://jitpack.io/v/kibotu/SplashScreenDecorator.svg)](https://jitpack.io/#kibotu/SplashScreenDecorator)
-[![Android CI](https://github.com/kibotu/SplashScreenDecorator/actions/workflows/android.yml/badge.svg)](https://github.com/kibotu/SplashScreenDecorator/actions/workflows/android.yml)
+[![Maven Central Version](https://img.shields.io/maven-central/v/net.kibotu/androidx-splashscreen-compose)](https://central.sonatype.com/artifact/net.kibotu/androidx-splashscreen-compose)
+[![](https://jitpack.io/v/kibotu/androidx-splashscreen-compose.svg)](https://jitpack.io/#kibotu/androidx-splashscreen-compose)
+[![Android CI](https://github.com/kibotu/androidx-splashscreen-compose/actions/workflows/android.yml/badge.svg)](https://github.com/kibotu/androidx-splashscreen-compose/actions/workflows/android.yml)
 [![API](https://img.shields.io/badge/Min%20API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
 [![API](https://img.shields.io/badge/Target%20API-36%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=36)
 [![API](https://img.shields.io/badge/Java-17-brightgreen.svg?style=flat)](https://www.oracle.com/java/technologies/javase/17all-relnotes.html)
@@ -12,7 +12,7 @@
 
 Let's cut to the chase: Android's default splash screen is boring. This library lets you create stunning animated splash screens using Compose without the headache. No more static drawables, no more janky transitions.
 
-![screenshot](docs/teaser.webp)
+![screenshot](docs/teaser.gif)
 
 ## What's the Point? 🎯
 
@@ -22,7 +22,7 @@ Look, we all know the pain points:
 - Transitions that look like they're from 2010
 - Zero Compose support out of the box
 
-**Here's what you get with SplashScreenDecorator:**
+**Here's what you get with androidx-splashscreen-compose:**
 - Drop-in Compose animations that actually look good
 - Smooth transitions that don't make users cringe
 - Complete control over timing and animations
@@ -32,14 +32,14 @@ Look, we all know the pain points:
 
 1. Add the dependency:
 ```groovy
-implementation 'net.kibotu:SplashScreenDecorator:{latest-version}'
+implementation 'net.kibotu:androidx-splashscreen-compose:{latest-version}'
 ```
 
 2. Create your splash screen:
 ```kotlin
 class MainActivity : ComponentActivity() {
     
-    private var splashScreen: SplashScreenDecorator? = null
+    private var splashScreen: SplashScreenCompose? = null
     
     override fun onCreate(savedInstanceState: Bundle?) {
         // Initialize before super.onCreate()
@@ -257,7 +257,7 @@ private fun RippleCircle(
 
 ### vs *only* AndroidX SplashScreen
 
-| Feature | SplashScreenDecorator | AndroidX SplashScreen |
+| Feature | androidx-splashscreen-compose | AndroidX SplashScreen |
 |---------|----------------------|----------------------|
 | Animation Support | ✅ Full Compose animations | ❌ Static vector only |
 | Custom Content | ✅ Any Composable | ❌ Icon + background only |
@@ -269,7 +269,7 @@ private fun RippleCircle(
 
 ### vs Custom Splash Activities
 
-| Feature | SplashScreenDecorator | Custom Splash Activity |
+| Feature | androidx-splashscreen-compose | Custom Splash Activity |
 |---------|----------------------|------------------------|
 | Android 12+ Compliance | ✅ Fully compliant | ❌ Requires extra work |
 | App Launch Performance | ✅ No additional activity | ❌ Extra activity overhead |
@@ -279,7 +279,7 @@ private fun RippleCircle(
    
 ## When to Use What 🤔
 
-**Use SplashScreenDecorator when:**
+**Use androidx-splashscreen-compose when:**
 - You need animations that don't look like they're from a 2010 tutorial
 - Your brand guidelines require more than a static logo
 - You want Compose-based animations without the setup headache

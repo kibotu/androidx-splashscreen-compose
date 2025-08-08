@@ -141,68 +141,153 @@ class MainActivity : ComponentActivity() {
 }
 ```
 
-
-### 3. Advanced Configuration
-
-```kotlin
-splashScreen = splash {
-    // Customize animation durations
-    exitAnimationDuration = 800L
-    composeViewFadeDurationOffset = 300L
-    
-    content {
-        MyTheme {
-            ComplexSplashAnimation(
-                isVisible = isVisible.value,
-                exitDuration = 800.milliseconds,
-                onStartExitAnimation = { startExitAnimation() }
-            )
-        }
-    }
-}
-```
-
 ## Advanced Usage 🔧
 
 ### Heartbeat Animation Pattern
 
-The library includes a sophisticated heartbeat animation as an example:
 
 ```kotlin
-@Composable
 fun HeartBeatAnimation(
+    modifier: Modifier = Modifier,
     isVisible: Boolean = true,
-    exitAnimationDuration: Duration = 600.milliseconds,
+    exitAnimationDuration: Duration = Duration.ZERO,
     onStartExitAnimation: () -> Unit = {}
 ) {
+    // Animation constants
     val rippleCount = 4
+    val rippleDurationMs = 3313
+    val rippleDelayMs = rippleDurationMs / 8
     val baseSize = 144.dp
-    
+    val containerSize = 288.dp
+
+    // Track exit animation state
     var isExitAnimationStarted by remember { mutableStateOf(false) }
-    
+
+    // Trigger exit animation when visibility changes
     LaunchedEffect(isVisible) {
         if (!isVisible && !isExitAnimationStarted) {
             isExitAnimationStarted = true
             onStartExitAnimation()
         }
     }
-    
-    Box(modifier = Modifier.fillMaxSize()) {
+
+    // Calculate screen diagonal for exit animation scaling
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp
+    val screenHeight = configuration.screenHeightDp
+    val screenDiagonal = sqrt((screenWidth * screenWidth + screenHeight * screenHeight).toFloat())
+
+    // Exit animation scale with snappy easing
+    val snappyEasing = CubicBezierEasing(0.2f, 0.0f, 0.2f, 1.0f)
+    val exitAnimationScale by animateFloatAsState(
+        targetValue = if (isExitAnimationStarted) screenDiagonal / baseSize.value else 0f,
+        animationSpec = tween(
+            durationMillis = exitAnimationDuration.toInt(DurationUnit.MILLISECONDS),
+            easing = snappyEasing
+        ),
+        label = "exitScale"
+    )
+
+    // Infinite ripple animation transition
+    val infiniteTransition = rememberInfiniteTransition(label = "heartbeatTransition")
+
+    Box(
+        modifier = modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        // Only show ripples when visible and not exiting
         if (isVisible && !isExitAnimationStarted) {
-            // Ripple animations
-            repeat(rippleCount) { index ->
-                RippleCircle(index = index, baseSize = baseSize)
+            Box(
+                modifier = Modifier.size(containerSize),
+                contentAlignment = Alignment.Center
+            ) {
+                // Create ripple circles with staggered animations
+                repeat(rippleCount) { index ->
+                    RippleCircle(
+                        infiniteTransition = infiniteTransition,
+                        index = index,
+                        rippleDurationMs = rippleDurationMs,
+                        rippleDelayMs = rippleDelayMs,
+                        baseSize = baseSize
+                    )
+                }
             }
         }
-        
+
+        // Exit animation circle
         if (isExitAnimationStarted) {
-            ExitAnimation(
-                baseSize = baseSize,
-                duration = exitAnimationDuration
+            Box(
+                modifier = Modifier
+                    .size(baseSize)
+                    .graphicsLayer {
+                        scaleX = exitAnimationScale
+                        scaleY = exitAnimationScale
+                    }
+                    .background(
+                        color = blueCatalina,
+                        shape = CircleShape
+                    )
             )
         }
     }
 }
+
+@Composable
+private fun RippleCircle(
+    infiniteTransition: InfiniteTransition,
+    index: Int,
+    rippleDurationMs: Int,
+    rippleDelayMs: Int,
+    baseSize: Dp
+) {
+    val totalDuration = rippleDurationMs + (rippleDelayMs * index)
+    val easing = CubicBezierEasing(0.4f, 0.0f, 0.2f, 1.0f)
+
+    // Animate scale from 1f to 4f
+    val animatedScale by infiniteTransition.animateFloat(
+        initialValue = 1f,
+        targetValue = 4f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(
+                durationMillis = totalDuration,
+                delayMillis = rippleDelayMs * index,
+                easing = easing
+            ),
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "rippleScale$index"
+    )
+
+    // Animate alpha from 0.25f to 0f
+    val animatedAlpha by infiniteTransition.animateFloat(
+        initialValue = 0.25f,
+        targetValue = 0f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(
+                durationMillis = totalDuration,
+                delayMillis = rippleDelayMs * index,
+                easing = easing
+            ),
+            repeatMode = RepeatMode.Restart
+        ),
+        label = "rippleAlpha$index"
+    )
+
+    Box(
+        modifier = Modifier
+            .size(baseSize)
+            .graphicsLayer {
+                scaleX = animatedScale
+                scaleY = animatedScale
+                alpha = animatedAlpha
+            }
+            .background(
+                color = blueCatalina,
+                shape = CircleShape
+            )
+    )
+}
+
 ```
 
 ### Custom Timing Control
@@ -211,14 +296,20 @@ Fine-tune animation timing for perfect transitions:
 
 ```kotlin
 splashScreen = splash {
-    exitAnimationDuration = 600L
-    composeViewFadeDurationOffset = 200L 
+    // Customize animation durations
+    val exitDuration = 800L
+    val fadeDurationOffset = 200L
     
     content {
-        TimedSplashSequence(
-            isVisible = isVisible.value,
-            onComplete = { startExitAnimation() }
-        )
+        MyTheme {
+            exitAnimationDuration = exitDuration
+            composeViewFadeDurationOffset = fadeDurationOffset
+            ComplexSplashAnimation(
+                isVisible = isVisible.value,
+                exitDuration = 800.milliseconds,
+                onStartExitAnimation = { startExitAnimation() }
+            )
+        }
     }
 }
 ```

@@ -43,8 +43,14 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun showSplash() {
+
+        val exitDuration = 800L
+        val fadeDurationOffset = 200L
+
         splashScreen = splash {
             content {
+                exitAnimationDuration = exitDuration
+                composeViewFadeDurationOffset = fadeDurationOffset
                 SplashScreenDecoratorTheme {
                     HeartBeatAnimation(
                         isVisible = isVisible.value,

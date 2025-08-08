@@ -12,7 +12,7 @@
 
 Let's cut to the chase: Android's default splash screen is boring. This library lets you create stunning animated splash screens using Compose without the headache. No more static drawables, no more janky transitions.
 
-![screenshot](docs/teaser.gif)
+![screenshot](docs/teaser.webp)
 
 ## What's the Point? 🎯
 

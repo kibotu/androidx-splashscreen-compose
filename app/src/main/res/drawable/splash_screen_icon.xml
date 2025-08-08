@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="108dp"
+            android:height="108dp"
+            android:viewportWidth="108"
+            android:viewportHeight="108">
+            
+            <!-- Rotating gradient background -->
+            <group
+                android:name="gradient_group"
+                android:pivotX="54"
+                android:pivotY="54">
+                <path
+                    android:name="circle"
+                    android:pathData="M54,54m-54,0a54,54 0,1 1,108 0a54,54 0,1 1,-108 0"
+                    android:fillType="evenOdd">
+                    <aapt:attr name="android:fillColor">
+                        <gradient
+                            android:type="sweep"
+                            android:centerX="54"
+                            android:centerY="54"
+                            android:gradientRadius="54">
+                            <item android:offset="0.0" android:color="#FFFF0000"/>
+                            <item android:offset="0.125" android:color="#FFFF8000"/>
+                            <item android:offset="0.25" android:color="#FFFFFF00"/>
+                            <item android:offset="0.375" android:color="#FF00FF00"/>
+                            <item android:offset="0.5" android:color="#FF00FFFF"/>
+                            <item android:offset="0.625" android:color="#FF0000FF"/>
+                            <item android:offset="0.75" android:color="#FF8000FF"/>
+                            <item android:offset="1.0" android:color="#FFFF0000"/>
+                        </gradient>
+                    </aapt:attr>
+                </path>
+            </group>
+
+            <!-- Static content -->
+            <group
+                android:name="static_content"
+                android:pivotX="54"
+                android:pivotY="54">
+                <!-- Inner white circle -->
+                <path
+                    android:name="inner_circle"
+                    android:pathData="M54,54m-24,0a24,24 0,1 1,48 0a24,24 0,1 1,-48 0"
+                    android:fillColor="#88FFFFFF"/>
+                <!-- Simple sparkle star -->
+                <path
+                    android:name="sparkle"
+                    android:pathData="M54,46 L56,52 L62,54 L56,56 L54,62 L52,56 L46,54 L52,52 Z"
+                    android:fillColor="#FFD700"/>
+            </group>
+        </vector>
+    </aapt:attr>
+
+    <!-- Rotation animation for the gradient -->
+    <target android:name="gradient_group">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:propertyName="rotation"
+                android:duration="3000"
+                android:valueFrom="0"
+                android:valueTo="360"
+                android:repeatCount="infinite"
+                android:repeatMode="restart"
+                android:interpolator="@android:interpolator/linear"/>
+        </aapt:attr>
+    </target>
+</animated-vector>

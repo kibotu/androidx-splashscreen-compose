@@ -51,14 +51,30 @@ ext {
             // Androidx SplashScreen
             // https://mvnrepository.com/artifact/androidx.core/core-splashscreen?repo=google
             // https://maven.google.com/web/index.html?q=androidx.core#androidx.core:core-splashscreen
-            "androidx.core:core-splashscreen"              : "1.2.0-rc01",
+            "androidx.core:core-splashscreen"              : "1.0.1",
+    ]
+
+    testLibs = [
+            "junit:junit"                                  : "4.13.2",
+            "org.jetbrains.kotlinx:kotlinx-coroutines-test": "1.10.2",
+            "io.mockk:mockk"                               : "1.13.9",
+            "androidx.test:core-ktx"                       : "1.6.1",
+            "androidx.test.ext:junit-ktx"                  : "1.2.1",
+            "androidx.test.ext:junit"                      : "1.2.1",
+            "androidx.test.espresso:espresso-core"         : "3.6.1",
+            "io.mockk:mockk-android"                       : "1.13.9",
+            "org.robolectric:robolectric"                  : "4.11.1",
+            "androidx.test:runner"                         : "1.6.1",
+            "androidx.test:rules"                          : "1.6.1",
+            "org.mockito.kotlin:mockito-kotlin"            : "6.0.0",
+            "org.mockito:mockito-core"            : "5.18.0",
     ]
 
     desugaring = [
             "com.android.tools:desugar_jdk_libs": "2.1.5"
     ]
 
-    LIBRARIES = libs + desugaring
+    LIBRARIES = libs + testLibs + desugaring
 
     getLibraryFromMap = { Map<String, String> map, String lib ->
         Map.Entry<String, String> libData = map.find { Map.Entry<String, String> entry -> entry["key"] == lib }

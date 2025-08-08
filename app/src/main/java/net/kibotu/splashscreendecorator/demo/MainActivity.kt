@@ -30,16 +30,20 @@ class MainActivity : ComponentActivity() {
                 AnimatedWelcomeScreen()
             }
         }
+
+        // delay for demonstration purposes
+        lifecycleScope.launch {
+            // delay os splash screen
+            delay(1.seconds)
+            splashScreen?.shouldKeepOnScreen = false
+            // delay custom splash screen
+            delay(3.seconds)
+            splashScreen?.dismiss()
+        }
     }
 
     private fun showSplash() {
-
-        val exitAnimationDuration = 600L
-        val composeViewFadeDurationOffset = 200L
-
         splashScreen = splash {
-            this.exitAnimationDuration = exitAnimationDuration
-            this.composeViewFadeDurationOffset = composeViewFadeDurationOffset
             content {
                 SplashScreenDecoratorTheme {
                     HeartBeatAnimation(
@@ -49,14 +53,6 @@ class MainActivity : ComponentActivity() {
                     )
                 }
             }
-        }
-
-        // delay os splash screen for demonstration purposes
-        lifecycleScope.launch {
-            delay(1.seconds)
-            splashScreen?.shouldKeepOnScreen = false
-            delay(3.seconds)
-            splashScreen?.dismiss()
         }
     }
 

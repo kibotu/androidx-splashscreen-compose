@@ -10,116 +10,49 @@
 [![Kotlin](https://img.shields.io/badge/kotlin-2.2.0-green.svg)](https://kotlinlang.org/)
 [![License](https://img.shields.io/badge/license-Apache%202-blue)](LICENSE)
 
-> Transform static splash screens into stunning Compose animations with zero setup complexity.
-
-🚀 **About**
-SplashScreenDecorator seamlessly bridges the gap between AndroidX SplashScreen and Jetpack Compose. It injects custom Composables into the native splash flow, enabling beautiful animated branding during app startup without the static image limitations of the standard implementation.
+Let's cut to the chase: Android's default splash screen is boring. This library lets you create stunning animated splash screens using Compose without the headache. No more static drawables, no more janky transitions.
 
 ![screenshot](docs/teaser.webp)
 
-## Table of Contents 📑
-- [Why SplashScreenDecorator?](#why-splashscreendecorator-)
-- [Key Features](#key-features-)
-- [Installation](#installation-)
-- [Quick Start](#quick-start-)
-- [Advanced Usage](#advanced-usage-)
-- [Best Practices](#best-practices-)
-- [Comparison with Alternatives](#comparison-with-alternatives-)
-- [Contributing](#contributing-)
-- [License](#license-)
+## What's the Point? 🎯
 
-## Why SplashScreenDecorator? 🤔
+Look, we all know the pain points:
+- Android's splash screen is just a static image
+- Animations? Good luck with that
+- Transitions that look like they're from 2010
+- Zero Compose support out of the box
 
-Modern Android apps demand compelling first impressions, but AndroidX SplashScreen falls short:
+**Here's what you get with SplashScreenDecorator:**
+- Drop-in Compose animations that actually look good
+- Smooth transitions that don't make users cringe
+- Complete control over timing and animations
+- Works with AndroidX SplashScreen, not against it
 
-### Common Problems
-- ❌ Limited to static vector drawables
-- ❌ No support for complex animations
-- ❌ Jarring transitions between system and app content
-- ❌ Difficult to create brand-consistent experiences
-- ❌ Poor control over timing and sequencing
-- ❌ No Compose integration
+## Get Started in 30 Seconds 🚀
 
-### SplashScreenDecorator's Solutions
-- ✅ Full Jetpack Compose support with rich animations
-- ✅ Seamless transition control with precise timing
-- ✅ Custom animation triggers and state management
-- ✅ Professional fade orchestration between system and custom views
-- ✅ DSL-based configuration for clean, readable code
-- ✅ Complete compatibility with AndroidX SplashScreen
-
-## Key Features 🌟
-
-- **Native Compose Integration**: Full Jetpack Compose support for rich, animated splash screens
-- **Seamless Transitions**: Smooth orchestration between system splash and custom content
-- **Animation Control**: Precise timing control with custom exit animations
-- **DSL Configuration**: Clean, type-safe configuration with Kotlin DSL
-- **Professional Fade Management**: Staggered fade timing prevents visual jumps
-- **State Management**: Reactive state updates for animation triggers
-- **Zero Boilerplate**: Simple one-line setup with powerful customization
-- **AndroidX Compatible**: Built on top of AndroidX SplashScreen for maximum compatibility
-
-## Installation 📦
-
-### Maven Central
-
+1. Add the dependency:
 ```groovy
-allprojects {
-    repositories {
-        mavenCentral()
-    }
-}
-
-dependencies {
-    implementation 'net.kibotu:SplashScreenDecorator:{latest-version}'
-}
+implementation 'net.kibotu:SplashScreenDecorator:{latest-version}'
 ```
 
-### JitPack (Alternative)
-
-1. Add JitPack repository:
-```groovy
-// settings.gradle.kts
-dependencyResolutionManagement {
-    repositories {
-        maven { url = uri("https://jitpack.io") }
-    }
-}
-```
-
-2. Add the dependency:
-```groovy
-// build.gradle.kts
-dependencies {
-    implementation("com.github.kibotu:SplashScreenDecorator:latest-version")
-}
-```
-
-## Quick Start 🚀
-
-### 1. Basic Setup
-
-Create an animated splash screen with just a few lines:
-
+2. Create your splash screen:
 ```kotlin
 class MainActivity : ComponentActivity() {
     
     private var splashScreen: SplashScreenDecorator? = null
     
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Initialize splash before super.onCreate()
+        // Initialize before super.onCreate()
         splashScreen = splash {
             content {
-                // Your custom Compose content
-                SplashScreenDecoratorTheme {
-                    HeartBeatAnimation(
-                        isVisible = isVisible.value,
-                        exitAnimationDuration = exitAnimationDuration.milliseconds,
-                        onStartExitAnimation = { startExitAnimation() }
-                    )
-                }
+                HeartBeatAnimation(
+                    isVisible = isVisible.value,
+                    exitAnimationDuration = exitAnimationDuration.milliseconds,
+                    onStartExitAnimation = { startExitAnimation() }
+                )
             }
         }
+        
         // start your own splash screen animation
         splashScreen?.shouldKeepOnScreen = false
         
@@ -132,18 +65,23 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    override onStart() {
+    override fun onStart() {
         super.onStart()
-
+        
         // trigger your custom splash animation
         splashScreen?.dismiss()
     }
 }
 ```
 
-## Advanced Usage 🔧
+That's it. No, really.
 
-### Heartbeat Animation Pattern
+## Show Me the Good Stuff 🎨
+
+### Heartbeat Animation Example
+
+Here's a real-world example of a heartbeat animation that actually ships in production apps:
+
 
 
 ```kotlin
@@ -290,124 +228,30 @@ private fun RippleCircle(
 
 ```
 
-### Custom Timing Control
+## Pro Tips 💡
 
-Fine-tune animation timing for perfect transitions:
+1. **Timing is Everything**
+   ```kotlin
+   splashScreen = splash {
+       content {
+           exitAnimationDuration = 800L // Sweet spot for most animations
+           composeViewFadeDurationOffset = 200L // Prevents jarring transitions
+       }
+   }
+   ```
 
-```kotlin
-splashScreen = splash {
-    // Customize animation durations
-    val exitDuration = 800L
-    val fadeDurationOffset = 200L
-    
-    content {
-        MyTheme {
-            exitAnimationDuration = exitDuration
-            composeViewFadeDurationOffset = fadeDurationOffset
-            ComplexSplashAnimation(
-                isVisible = isVisible.value,
-                exitDuration = 800.milliseconds,
-                onStartExitAnimation = { startExitAnimation() }
-            )
-        }
-    }
-}
-```
+2. **Memory Management**
+   ```kotlin
+   override fun onDestroy() {
+       splashScreen = null // Don't leak memory
+       super.onDestroy()
+   }
+   ```
 
-### Memory Management
-
-Properly clean up resources:
-
-```kotlin
-override fun onDestroy() {
-    splashScreen = null
-    super.onDestroy()
-}
-```
-
-## Best Practices 💡
-
-### 1. Animation Timing
-
-```kotlin
-// ✅ Good: Coordinated timing
-@Composable
-fun CoordinatedSplash(controller: SplashScreenController) {
-    val animationDuration = 600.milliseconds
-    
-    LaunchedEffect(controller.isVisible.value) {
-        if (!controller.isVisible.value) {
-            delay(animationDuration) // Wait for animation
-            controller.startExitAnimation()
-        }
-    }
-    
-    // Your animation logic
-}
-
-// ❌ Bad: Immediate exit without animation
-@Composable
-fun ImmediateSplash(controller: SplashScreenController) {
-    LaunchedEffect(controller.isVisible.value) {
-        if (!controller.isVisible.value) {
-            controller.startExitAnimation() // Too fast!
-        }
-    }
-}
-```
-
-### 2. State Management
-
-```kotlin
-// ✅ Good: Clear state separation
-@Composable
-fun StatefulSplash(isVisible: Boolean, onExit: () -> Unit) {
-    var phase by remember { mutableStateOf(SplashPhase.ENTER) }
-    
-    LaunchedEffect(isVisible) {
-        if (!isVisible) {
-            phase = SplashPhase.EXIT
-            delay(600) // Animation time
-            onExit()
-        }
-    }
-    
-    when (phase) {
-        SplashPhase.ENTER -> EnterAnimation()
-        SplashPhase.EXIT -> ExitAnimation()
-    }
-}
-
-enum class SplashPhase { ENTER, EXIT }
-```
-
-### 3. Performance Optimization
-
-```kotlin
-// ✅ Good: Efficient animations
-@Composable
-fun OptimizedSplash() {
-    val infiniteTransition = rememberInfiniteTransition()
-    
-    // Reuse transition for multiple animations
-    val scale by infiniteTransition.animateFloat(
-        initialValue = 1f,
-        targetValue = 1.2f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(1000),
-            repeatMode = RepeatMode.Reverse
-        )
-    )
-    
-    // Efficient graphics layer usage
-    Box(
-        modifier = Modifier.graphicsLayer {
-            scaleX = scale
-            scaleY = scale
-        }
-    )
-}
-```
+3. **Performance First**
+   - Use `rememberInfiniteTransition()` for repeating animations
+   - Keep animations under 1 second (users hate waiting)
+   - Test on low-end devices
 
 ## Comparison with Alternatives 🔄
 
@@ -431,46 +275,51 @@ fun OptimizedSplash() {
 | App Launch Performance | ✅ No additional activity | ❌ Extra activity overhead |
 | Transition Seamlessness | ✅ Native system integration | ❌ Potential flicker |
 | Code Complexity | ✅ Single file setup | ❌ Multiple components |
-| Maintenance | ✅ Library handles updates | ❌ Manual Android compliance |
+| Maintenance | ✅ Library handles updates | ❌ Manual Android compliance |   
+   
+## When to Use What 🤔
 
-### When to Use What?
-
-**Choose SplashScreenDecorator when you need:**
-- Rich, animated splash screens with full creative control
-- Seamless integration with existing AndroidX SplashScreen setup
-- Professional-grade transition management
-- Jetpack Compose-based animations
+**Use SplashScreenDecorator when:**
+- You need animations that don't look like they're from a 2010 tutorial
+- Your brand guidelines require more than a static logo
+- You want Compose-based animations without the setup headache
 - Android 12+ compliance with zero additional effort
-- Complex animation sequences with precise timing
+- Seamless integration with existing AndroidX SplashScreen setup
 
-**Choose AndroidX SplashScreen when:**
-- Simple static splash with just logo and background
-- Minimal app complexity and startup time
-- No custom animation requirements
-- Smallest possible library footprint
+**Stick with AndroidX SplashScreen when:**
+- A static logo is all you need
+- You're optimizing for the smallest possible APK size
+- You don't need any custom animations
 
 **Choose Custom Splash Activity when:**
 - Pre-Android 12 apps with no compliance requirements
 - Complex initialization flows requiring multiple screens
 - Non-Compose apps with View-based animations
 
+## Compatibility 📱
+
+- Minimum Android SDK: 21
+- Target Android SDK: 36
+- Kotlin: 2.2.0
+- Java: 17
+- Gradle: 8.12.0
+
 ## Contributing 🤝
 
-We welcome contributions! 
+Got ideas? Found a bug? PRs are welcome:
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-animation`)
-3. Commit your changes (`git commit -m 'Add amazing animation feature'`)
-4. Push to the branch (`git push origin feature/amazing-animation`)
+1. Fork it
+2. Create your feature branch (`git checkout -b feature/amazing`)
+3. Commit your changes (`git commit -m 'Add something amazing'`)
+4. Push to the branch (`git push origin feature/amazing`)
 5. Open a Pull Request
 
 ## License 📄
 
-This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details.
+Apache 2.0 - do what you want, just don't blame us if something goes wrong. See [LICENSE](LICENSE) for the boring details.
 
-## Acknowledgments 🙏
-
+---
 - Built on top of [AndroidX SplashScreen](https://developer.android.com/develop/ui/views/launch/splash-screen)
 - Powered by [Jetpack Compose](https://developer.android.com/compose)
 - Inspired by modern app branding expectations
-- Made with ❤️ by [kibotu](https://github.com/kibotu)
+- Made with ☕ by [kibotu](https://github.com/kibotu)

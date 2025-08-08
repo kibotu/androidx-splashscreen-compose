@@ -77,6 +77,7 @@ dependencies {
     implementation platform(getLibrary("androidx.compose:compose-bom"))
     implementation getLibrary("androidx.compose.ui:ui")
     implementation getLibrary("androidx.core:core-splashscreen")
+    implementation getLibrary("androidx.core:core-ktx")
 
     // Testing dependencies
     testImplementation getLibrary("junit:junit")

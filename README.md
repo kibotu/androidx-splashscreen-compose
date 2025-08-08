@@ -24,7 +24,6 @@ SplashScreenDecorator seamlessly bridges the gap between AndroidX SplashScreen a
 - [Quick Start](#quick-start-)
 - [Advanced Usage](#advanced-usage-)
 - [Best Practices](#best-practices-)
-- [Animation Examples](#animation-examples-)
 - [Comparison with Alternatives](#comparison-with-alternatives-)
 - [Contributing](#contributing-)
 - [License](#license-)
@@ -109,18 +108,6 @@ class MainActivity : ComponentActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         // Initialize splash before super.onCreate()
-        setupSplash()
-        
-        super.onCreate(savedInstanceState)
-        
-        setContent {
-            MyAppTheme {
-                MainScreen()
-            }
-        }
-    }
-    
-    private fun setupSplash() {
         splashScreen = splash {
             content {
                 // Your custom Compose content
@@ -130,17 +117,22 @@ class MainActivity : ComponentActivity() {
                 )
             }
         }
+        // start your own splash screen animation
+        splashScreen?.shouldKeepOnScreen = false
         
-        // Control splash dismissal
-        lifecycleScope.launch {
-            // Wait for app initialization
-            delay(2.seconds)
-            splashScreen?.shouldKeepOnScreen = false
-            
-            // Trigger exit animation
-            delay(1.seconds)
-            splashScreen?.dismiss()
+        super.onCreate(savedInstanceState)
+        
+        setContent {
+            MyAppTheme {
+                MainScreen()
+            }
         }
+    }
+
+    override onResume() {
+        super.onResume()
+        splashScreen?.dismiss()
+        splashScreen = null
     }
 }
 ```
@@ -258,18 +250,9 @@ fun HeartBeatAnimation(
 Fine-tune animation timing for perfect transitions:
 
 ```kotlin
-class SplashConfiguration {
-    companion object {
-        const val SYSTEM_SPLASH_DURATION = 1000L
-        const val CUSTOM_ANIMATION_DURATION = 2000L
-        const val EXIT_ANIMATION_DURATION = 600L
-        const val FADE_OFFSET = 200L
-    }
-}
-
 splashScreen = splash {
-    exitAnimationDuration = SplashConfiguration.EXIT_ANIMATION_DURATION
-    composeViewFadeDurationOffset = SplashConfiguration.FADE_OFFSET
+    exitAnimationDuration = 600L
+    composeViewFadeDurationOffset = 200L 
     
     content {
         TimedSplashSequence(
@@ -375,94 +358,9 @@ fun OptimizedSplash() {
 }
 ```
 
-## Animation Examples 🎭
-
-### 1. Typewriter Effect
-
-```kotlin
-@Composable
-fun TypewriterSplash(
-    text: String,
-    isVisible: Boolean,
-    onComplete: () -> Unit
-) {
-    var displayedText by remember { mutableStateOf("") }
-    
-    LaunchedEffect(isVisible) {
-        if (isVisible) {
-            text.forEachIndexed { index, _ ->
-                delay(100)
-                displayedText = text.substring(0, index + 1)
-            }
-            delay(1000)
-            onComplete()
-        }
-    }
-    
-    Text(
-        text = displayedText,
-        style = MaterialTheme.typography.headlineLarge,
-        modifier = Modifier.fillMaxWidth(),
-        textAlign = TextAlign.Center
-    )
-}
-```
-
-### 2. Floating Elements
-
-```kotlin
-@Composable
-fun FloatingElementsSplash() {
-    val density = LocalDensity.current
-    val configuration = LocalConfiguration.current
-    
-    repeat(10) { index ->
-        FloatingElement(
-            index = index,
-            screenWidth = with(density) { configuration.screenWidthDp.dp.toPx() },
-            screenHeight = with(density) { configuration.screenHeightDp.dp.toPx() }
-        )
-    }
-}
-
-@Composable
-fun FloatingElement(
-    index: Int,
-    screenWidth: Float,
-    screenHeight: Float
-) {
-    val infiniteTransition = rememberInfiniteTransition()
-    
-    val offsetY by infiniteTransition.animateFloat(
-        initialValue = screenHeight,
-        targetValue = -100f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(
-                durationMillis = (3000..8000).random(),
-                easing = LinearEasing
-            ),
-            repeatMode = RepeatMode.Restart
-        )
-    )
-    
-    Box(
-        modifier = Modifier
-            .offset(
-                x = (screenWidth * (index / 10f)).dp,
-                y = offsetY.dp
-            )
-            .size(20.dp)
-            .background(
-                Color.White.copy(alpha = 0.3f),
-                CircleShape
-            )
-    )
-}
-```
-
 ## Comparison with Alternatives 🔄
 
-### vs AndroidX SplashScreen
+### vs *only* AndroidX SplashScreen
 
 | Feature | SplashScreenDecorator | AndroidX SplashScreen |
 |---------|----------------------|----------------------|

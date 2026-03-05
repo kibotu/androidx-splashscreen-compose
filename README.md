@@ -3,16 +3,14 @@
 [![Maven Central Version](https://img.shields.io/maven-central/v/net.kibotu/androidx-splashscreen-compose)](https://central.sonatype.com/artifact/net.kibotu/androidx-splashscreen-compose)
 [![](https://jitpack.io/v/kibotu/androidx-splashscreen-compose.svg)](https://jitpack.io/#kibotu/androidx-splashscreen-compose)
 [![Android CI](https://github.com/kibotu/androidx-splashscreen-compose/actions/workflows/android.yml/badge.svg)](https://github.com/kibotu/androidx-splashscreen-compose/actions/workflows/android.yml)
-[![API](https://img.shields.io/badge/Min%20API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
+[![API](https://img.shields.io/badge/Min%20API-23%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=23)
 [![API](https://img.shields.io/badge/Target%20API-36%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=36)
 [![API](https://img.shields.io/badge/Java-17-brightgreen.svg?style=flat)](https://www.oracle.com/java/technologies/javase/17all-relnotes.html)
-[![Gradle Version](https://img.shields.io/badge/gradle-8.12.0-green.svg)](https://docs.gradle.org/current/release-notes)
-[![Kotlin](https://img.shields.io/badge/kotlin-2.2.0-green.svg)](https://kotlinlang.org/)
+[![Gradle Version](https://img.shields.io/badge/gradle-9.4.0-green.svg)](https://docs.gradle.org/current/release-notes)
+[![Kotlin](https://img.shields.io/badge/kotlin-2.3.0-green.svg)](https://kotlinlang.org/)
 [![License](https://img.shields.io/badge/license-Apache%202-blue)](LICENSE)
 
 Let's cut to the chase: Android's default splash screen is boring. This library lets you create stunning animated splash screens using Compose without the headache. No more static drawables, no more janky transitions.
-
-![screenshot](docs/teaser.webp)
 
 ## What's the Point? 🎯
 
@@ -38,38 +36,45 @@ implementation 'net.kibotu:androidx-splashscreen-compose:{latest-version}'
 2. Create your splash screen:
 ```kotlin
 class MainActivity : ComponentActivity() {
-    
+
     private var splashScreen: SplashScreenDecorator? = null
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        val exitDuration = 800L
+
         // Initialize before super.onCreate()
         splashScreen = splash {
+            exitAnimationDuration = exitDuration
+            composeViewFadeDurationOffset = 200
+            backgroundColor = Color.White // match your windowSplashScreenBackground
             content {
-                HeartBeatAnimation(
+                MyAnimation(
                     isVisible = isVisible.value,
-                    exitAnimationDuration = exitAnimationDuration.milliseconds,
+                    exitAnimationDuration = exitDuration.milliseconds,
                     onStartExitAnimation = { startExitAnimation() }
                 )
             }
         }
-        
-        // start your own splash screen animation
         splashScreen?.shouldKeepOnScreen = false
-        
+
         super.onCreate(savedInstanceState)
-        
+
         setContent {
             MyAppTheme {
                 MainScreen()
             }
         }
+
+        // Dismiss after your content is ready, e.g. after requests are complete
+        lifecycleScope.launch {
+            delay(2.seconds)
+            splashScreen?.dismiss()
+        }
     }
 
-    override fun onStart() {
-        super.onStart()
-        
-        // trigger your custom splash animation
-        splashScreen?.dismiss()
+    override fun onDestroy() {
+        splashScreen = null
+        super.onDestroy()
     }
 }
 ```
@@ -233,9 +238,11 @@ private fun RippleCircle(
 1. **Timing is Everything**
    ```kotlin
    splashScreen = splash {
+       exitAnimationDuration = 800L // Sweet spot for most animations
+       composeViewFadeDurationOffset = 200 // Prevents jarring transitions
+       backgroundColor = splashBg // Match windowSplashScreenBackground
        content {
-           exitAnimationDuration = 800L // Sweet spot for most animations
-           composeViewFadeDurationOffset = 200L // Prevents jarring transitions
+           // Your composable here
        }
    }
    ```
@@ -298,11 +305,11 @@ private fun RippleCircle(
 
 ## Compatibility 📱
 
-- Minimum Android SDK: 21
+- Minimum Android SDK: 23
 - Target Android SDK: 36
-- Kotlin: 2.2.0
+- Kotlin: 2.3.0
 - Java: 17
-- Gradle: 8.12.0
+- Gradle: 9.4.0
 
 ## Contributing 🤝
 

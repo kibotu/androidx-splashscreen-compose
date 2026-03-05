@@ -85,27 +85,27 @@ dependencies {
 
     debugImplementation getLibrary("androidx.compose.ui:ui-test-manifest")
 }
-//
-//if (!isJitpack) {
-//    apply plugin: 'com.vanniktech.maven.publish'
-//    mavenPublishing {
-//        publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.CENTRAL_PORTAL, true)
-//        signAllPublications()
-//    }
-//}
-//
-//if (isJitpack) {
-//    apply plugin: 'maven-publish'
-//    afterEvaluate {
-//        publishing {
-//            publications {
-//                release(MavenPublication) {
-//                    from components.release
-//                    groupId = GROUP
-//                    artifactId = POM_ARTIFACT_ID
-//                    version = version
-//                }
-//            }
-//        }
-//    }
-//}
+
+if (!isJitpack) {
+    apply plugin: 'com.vanniktech.maven.publish'
+    mavenPublishing {
+        publishToMavenCentral(true)
+        signAllPublications()
+    }
+}
+
+if (isJitpack) {
+    apply plugin: 'maven-publish'
+    afterEvaluate {
+        publishing {
+            publications {
+                release(MavenPublication) {
+                    from components.release
+                    groupId = GROUP
+                    artifactId = POM_ARTIFACT_ID
+                    version = version
+                }
+            }
+        }
+    }
+}

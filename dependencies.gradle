@@ -18,17 +18,16 @@ ext {
     println "Version Name: $version"
 
     plugins = [
-            "com.android.tools.build:gradle"                               : "9.1.0-rc01",
+            "com.android.tools.build:gradle"                               : "9.1.0",
             "com.vanniktech:gradle-maven-publish-plugin"                   : "0.36.0",
-            "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin": "2.3.6",
             "org.jetbrains.kotlin:kotlin-gradle-plugin"                    : "$kotlinVersion",
             "org.jetbrains.kotlin:compose-compiler-gradle-plugin"          : "$kotlinVersion"
     ]
 
     libs = [
             // AndroidX
-            "androidx.core:core-ktx"                       : "1.16.0",
-            "androidx.lifecycle:lifecycle-runtime-ktx"     : "2.9.2",
+            "androidx.core:core-ktx"                       : "1.17.0",
+            "androidx.lifecycle:lifecycle-runtime-ktx"     : "2.10.0",
             "androidx.activity:activity-compose"           : "1.12.4",
 
             // Compose
@@ -36,17 +35,11 @@ ext {
             "androidx.compose.ui:ui"                       : "",
             "androidx.compose.ui:ui-graphics"              : "",
             "androidx.compose.animation:animation"         : "",
-            "androidx.compose.animation:animation-graphics": "",
             "androidx.compose.runtime:runtime"             : "",
             "androidx.compose.ui:ui-tooling-preview"       : "",
             "androidx.compose.material3:material3"         : "",
             "androidx.compose.ui:ui-tooling"               : "",
             "androidx.compose.ui:ui-test-manifest"         : "",
-            "androidx.compose.ui:ui-test-junit4"           : "",
-
-            // Support Libraries
-            "androidx.appcompat:appcompat"                 : "1.7.0",
-            "com.google.android.material:material"         : "1.12.0",
 
             // Androidx SplashScreen
             // https://mvnrepository.com/artifact/androidx.core/core-splashscreen?repo=google
@@ -56,18 +49,6 @@ ext {
 
     testLibs = [
             "junit:junit"                                  : "4.13.2",
-            "org.jetbrains.kotlinx:kotlinx-coroutines-test": "1.10.2",
-            "io.mockk:mockk"                               : "1.13.9",
-            "androidx.test:core-ktx"                       : "1.6.1",
-            "androidx.test.ext:junit-ktx"                  : "1.2.1",
-            "androidx.test.ext:junit"                      : "1.2.1",
-            "androidx.test.espresso:espresso-core"         : "3.6.1",
-            "io.mockk:mockk-android"                       : "1.13.9",
-            "org.robolectric:robolectric"                  : "4.11.1",
-            "androidx.test:runner"                         : "1.6.1",
-            "androidx.test:rules"                          : "1.6.1",
-            "org.mockito.kotlin:mockito-kotlin"            : "6.0.0",
-            "org.mockito:mockito-core"                     : "5.18.0",
     ]
 
     desugaring = [

@@ -51,8 +51,7 @@ class MainActivity : ComponentActivity() {
             backgroundColor = splashBg
             content {
                 SplashScreenDecoratorTheme {
-                    HeartBeatAnimation(
-                        backgroundColor = splashBg,
+                    RainbowHeartBeatAnimation(
                         isVisible = isVisible.value,
                         exitAnimationDuration = exitDuration.milliseconds,
                         onStartExitAnimation = { startExitAnimation() }

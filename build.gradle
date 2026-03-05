@@ -13,7 +13,6 @@ buildscript {
     dependencies {
         classpath getPluginLibrary("com.android.tools.build:gradle")
         classpath getPluginLibrary("org.jetbrains.kotlin:kotlin-gradle-plugin")
-        classpath getPluginLibrary("com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin")
         classpath getPluginLibrary("com.vanniktech:gradle-maven-publish-plugin")
         classpath getPluginLibrary("org.jetbrains.kotlin:compose-compiler-gradle-plugin")
     }

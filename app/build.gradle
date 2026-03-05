@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.jetbrains.kotlin.plugin.compose'
-apply plugin: 'com.google.devtools.ksp'
 
 android {
     namespace 'net.kibotu.splashscreendecorator.demo'
@@ -63,7 +62,6 @@ kotlin {
 dependencies {
     coreLibraryDesugaring getLibrary("com.android.tools:desugar_jdk_libs")
 
-    implementation getLibrary("com.google.android.material:material")
     implementation getLibrary("androidx.core:core-splashscreen")
     implementation project(":splashscreen-compose")
     implementation "androidx.compose.ui:ui-util"

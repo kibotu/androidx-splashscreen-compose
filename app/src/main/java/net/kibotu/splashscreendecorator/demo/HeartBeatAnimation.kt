@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -33,35 +34,26 @@ import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.DurationUnit
 
+private val BlueCatalinaLight: Color = Color(0xFF063773)
+private val BlueCatalinaDark: Color = Color(0xFF60A5FA)
 
-private val blueCatalina: Color = Color(0xFF063773)
-
-/**
- * A heartbeat animation composable that displays ripple effects with an optional exit animation.
- *
- * @param modifier Modifier to be applied to the animation container
- * @param isVisible Whether the animation should be visible and running
- * @param exitAnimationDuration Duration for the exit animation
- * @param onStartExitAnimation Callback invoked when the exit animation starts
- */
 @Composable
 fun HeartBeatAnimation(
     modifier: Modifier = Modifier,
+    backgroundColor: Color = Color.White,
+    accentColor: Color = if (isSystemInDarkTheme()) BlueCatalinaDark else BlueCatalinaLight,
     isVisible: Boolean = true,
     exitAnimationDuration: Duration = Duration.ZERO,
     onStartExitAnimation: () -> Unit = {}
 ) {
-    // Animation constants
     val rippleCount = 4
     val rippleDurationMs = 3313
     val rippleDelayMs = rippleDurationMs / 8
     val baseSize = 144.dp
     val containerSize = 288.dp
 
-    // Track exit animation state
     var isExitAnimationStarted by remember { mutableStateOf(false) }
 
-    // Trigger exit animation when visibility changes
     LaunchedEffect(isVisible) {
         if (!isVisible && !isExitAnimationStarted) {
             isExitAnimationStarted = true
@@ -69,13 +61,11 @@ fun HeartBeatAnimation(
         }
     }
 
-    // Calculate screen diagonal for exit animation scaling
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp
     val screenHeight = configuration.screenHeightDp
     val screenDiagonal = sqrt((screenWidth * screenWidth + screenHeight * screenHeight).toFloat())
 
-    // Exit animation scale with snappy easing
     val snappyEasing = CubicBezierEasing(0.2f, 0.0f, 0.2f, 1.0f)
     val exitAnimationScale by animateFloatAsState(
         targetValue = if (isExitAnimationStarted) screenDiagonal / baseSize.value else 0f,
@@ -86,11 +76,12 @@ fun HeartBeatAnimation(
         label = "exitScale"
     )
 
-    // Infinite ripple animation transition
     val infiniteTransition = rememberInfiniteTransition(label = "heartbeatTransition")
 
     Box(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .background(backgroundColor),
         contentAlignment = Alignment.Center
     ) {
         // Only show ripples when visible and not exiting
@@ -106,7 +97,8 @@ fun HeartBeatAnimation(
                         index = index,
                         rippleDurationMs = rippleDurationMs,
                         rippleDelayMs = rippleDelayMs,
-                        baseSize = baseSize
+                        baseSize = baseSize,
+                        color = accentColor
                     )
                 }
             }
@@ -122,7 +114,7 @@ fun HeartBeatAnimation(
                         scaleY = exitAnimationScale
                     }
                     .background(
-                        color = blueCatalina,
+                        color = accentColor,
                         shape = CircleShape
                     )
             )
@@ -130,16 +122,14 @@ fun HeartBeatAnimation(
     }
 }
 
-/**
- * Individual ripple circle component with staggered animation
- */
 @Composable
 private fun RippleCircle(
     infiniteTransition: InfiniteTransition,
     index: Int,
     rippleDurationMs: Int,
     rippleDelayMs: Int,
-    baseSize: Dp
+    baseSize: Dp,
+    color: Color
 ) {
     val totalDuration = rippleDurationMs + (rippleDelayMs * index)
     val easing = CubicBezierEasing(0.4f, 0.0f, 0.2f, 1.0f)
@@ -183,7 +173,7 @@ private fun RippleCircle(
                 alpha = animatedAlpha
             }
             .background(
-                color = blueCatalina,
+                color = color,
                 shape = CircleShape
             )
     )
@@ -211,7 +201,8 @@ fun RippleCirclePreview() {
             index = 0,
             rippleDurationMs = 3313 / 4,
             rippleDelayMs = (3313 / 4) / 8,
-            baseSize = 144.dp
+            baseSize = 144.dp,
+            color = BlueCatalinaLight
         )
     }
 }

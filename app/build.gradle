@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
 apply plugin: 'org.jetbrains.kotlin.plugin.compose'
 apply plugin: 'com.google.devtools.ksp'
 
@@ -42,18 +41,22 @@ android {
 
     // region kotlin compile options
 
-    kotlinOptions {
-        jvmTarget = "17"
-        allWarningsAsErrors = false
-        kotlinOptions.verbose = true
-        freeCompilerArgs += [
-                "-Xjvm-default=all-compatibility"
-        ]
-    }
-
     // endregion
     buildFeatures {
         compose true
+    }
+}
+
+kotlin {
+    compilerOptions {
+        allWarningsAsErrors = false
+        verbose = true
+        // https://kotlinlang.org/docs/reference/java-to-kotlin-interop.html#default-methods-in-interfaces
+        freeCompilerArgs.addAll(
+                "-opt-in=kotlin.RequiresOptIn",
+                "-Xannotation-default-target=param-property",
+                "-Xexplicit-backing-fields"
+        )
     }
 }
 

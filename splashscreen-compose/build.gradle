@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
 apply plugin: 'org.jetbrains.kotlin.plugin.compose'
 
 android {
@@ -41,18 +40,6 @@ android {
 
     // endregion
 
-    // region kotlin compile options
-
-    kotlinOptions {
-        jvmTarget = "17"
-        kotlinOptions.verbose = true
-        freeCompilerArgs += [
-                "-Xjvm-default=all-compatibility",
-        ]
-    }
-
-    // endregion
-
     // region exclude duplicated meta inf files
 
     packagingOptions {
@@ -72,10 +59,24 @@ android {
     }
 }
 
+kotlin {
+    compilerOptions {
+        allWarningsAsErrors = false
+        verbose = true
+        // https://kotlinlang.org/docs/reference/java-to-kotlin-interop.html#default-methods-in-interfaces
+        freeCompilerArgs.addAll(
+                "-opt-in=kotlin.RequiresOptIn",
+                "-Xannotation-default-target=param-property",
+                "-Xexplicit-backing-fields"
+        )
+    }
+}
+
 dependencies {
     coreLibraryDesugaring getLibrary("com.android.tools:desugar_jdk_libs")
     implementation platform(getLibrary("androidx.compose:compose-bom"))
     implementation getLibrary("androidx.compose.ui:ui")
+    implementation "androidx.compose.foundation:foundation"
     implementation getLibrary("androidx.core:core-splashscreen")
     implementation getLibrary("androidx.core:core-ktx")
 
@@ -88,27 +89,27 @@ dependencies {
 
     debugImplementation getLibrary("androidx.compose.ui:ui-test-manifest")
 }
-
-if (!isJitpack) {
-    apply plugin: 'com.vanniktech.maven.publish'
-    mavenPublishing {
-        publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.CENTRAL_PORTAL, true)
-        signAllPublications()
-    }
-}
-
-if (isJitpack) {
-    apply plugin: 'maven-publish'
-    afterEvaluate {
-        publishing {
-            publications {
-                release(MavenPublication) {
-                    from components.release
-                    groupId = GROUP
-                    artifactId = POM_ARTIFACT_ID
-                    version = version
-                }
-            }
-        }
-    }
-}
+//
+//if (!isJitpack) {
+//    apply plugin: 'com.vanniktech.maven.publish'
+//    mavenPublishing {
+//        publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.CENTRAL_PORTAL, true)
+//        signAllPublications()
+//    }
+//}
+//
+//if (isJitpack) {
+//    apply plugin: 'maven-publish'
+//    afterEvaluate {
+//        publishing {
+//            publications {
+//                release(MavenPublication) {
+//                    from components.release
+//                    groupId = GROUP
+//                    artifactId = POM_ARTIFACT_ID
+//                    version = version
+//                }
+//            }
+//        }
+//    }
+//}

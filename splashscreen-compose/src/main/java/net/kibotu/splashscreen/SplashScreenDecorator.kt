@@ -4,9 +4,14 @@ import android.animation.ObjectAnimator
 import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.animation.doOnEnd
@@ -62,22 +67,35 @@ class SplashScreenDecorator private constructor(
         splashScreenViewProvider: SplashScreenViewProvider,
         parentViewGroup: ViewGroup
     ): ComposeView = ComposeView(splashScreenViewProvider.view.context).apply {
+        layoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnDetachedFromWindow)
 
         setContent {
-            config.content(
-                SplashScreenController(
-                    decorator = this@SplashScreenDecorator,
-                    onStartExitAnimation = {
-                        performExitAnimation(
-                            systemSplashView = splashScreenViewProvider.view,
-                            composeView = this@apply,
-                            parentViewGroup = parentViewGroup,
-                            splashScreenViewProvider = splashScreenViewProvider
-                        )
-                    }
-                )
+            val controller = SplashScreenController(
+                decorator = this@SplashScreenDecorator,
+                onStartExitAnimation = {
+                    performExitAnimation(
+                        systemSplashView = splashScreenViewProvider.view,
+                        composeView = this@apply,
+                        parentViewGroup = parentViewGroup,
+                        splashScreenViewProvider = splashScreenViewProvider
+                    )
+                }
             )
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .then(
+                        if (config.backgroundColor != Color.Unspecified)
+                            Modifier.background(config.backgroundColor)
+                        else Modifier
+                    )
+            ) {
+                config.content(controller)
+            }
         }
     }
 
@@ -136,7 +154,8 @@ data class SplashScreenController(
 data class SplashScreenConfig(
     val content: @Composable (SplashScreenController) -> Unit,
     val exitAnimationDuration: Long,
-    val composeViewFadeDurationOffset: Long
+    val composeViewFadeDurationOffset: Long,
+    val backgroundColor: Color
 )
 
 /** DSL builder because configuration objects with 7+ fields become unwieldy. */
@@ -148,6 +167,13 @@ class SplashScreenConfigBuilder {
 
     /** Additional duration for compose view fade out in milliseconds */
     var composeViewFadeDurationOffset: Long = 200.milliseconds.inWholeMilliseconds
+
+    /**
+     * Background color for the Compose overlay. Match this to your splash theme's
+     * `windowSplashScreenBackground` to prevent visual jumps during transition.
+     * Defaults to [Color.Unspecified] (transparent / no background).
+     */
+    var backgroundColor: Color = Color.Unspecified
 
     /** Your custom Composable with access to animation triggers. */
     fun content(block: @Composable SplashScreenController.() -> Unit) {
@@ -161,7 +187,8 @@ class SplashScreenConfigBuilder {
         return SplashScreenConfig(
             content = requireNotNull(content) { "Composable content must be provided for splash screen" },
             exitAnimationDuration = exitAnimationDuration,
-            composeViewFadeDurationOffset = composeViewFadeDurationOffset
+            composeViewFadeDurationOffset = composeViewFadeDurationOffset,
+            backgroundColor = backgroundColor
         )
     }
 }
@@ -170,11 +197,10 @@ class SplashScreenConfigBuilder {
  * Create splash screens with custom Compose content.
  *
  * ```kotlin
- * val exitAnimationDuration = 600L
- * val composeViewFadeDurationOffset = 200L
  * splashScreen = splash {
- *     this.exitAnimationDuration = exitAnimationDuration
- *     this.composeViewFadeDurationOffset = composeViewFadeDurationOffset
+ *     exitAnimationDuration = 1250
+ *     composeViewFadeDurationOffset = 200
+ *     backgroundColor = Color.White // match windowSplashScreenBackground
  *     content {
  *         HeartBeatAnimation(
  *             isVisible = isVisible.value,
@@ -187,6 +213,7 @@ class SplashScreenConfigBuilder {
  * // Later, when ready to dismiss
  * splashScreen.shouldKeepOnScreen = false
  * splashScreen.dismiss()
+ * ```
  */
 fun Activity.splash(
     builder: SplashScreenConfigBuilder.() -> Unit

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -50,10 +51,10 @@ fun AnimatedWelcomeScreen() {
         // Floating geometric elements background
         FloatingElements()
 
-        // Main content
         Column(
             modifier = Modifier.Companion
                 .fillMaxSize()
+                .systemBarsPadding()
                 .padding(32.dp),
             horizontalAlignment = Alignment.Companion.CenterHorizontally,
             verticalArrangement = Arrangement.Center

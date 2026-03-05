@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.ui.graphics.Color
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -16,14 +18,15 @@ import kotlin.time.Duration.Companion.seconds
 
 class MainActivity : ComponentActivity() {
 
-    var splashScreen: SplashScreenDecorator? = null
+    private var splashScreen: SplashScreenDecorator? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         showSplash()
+        splashScreen?.shouldKeepOnScreen = false
 
-        super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        super.onCreate(savedInstanceState)
 
         setContent {
             SplashScreenDecoratorTheme {
@@ -31,30 +34,27 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        // delay for demonstration purposes
         lifecycleScope.launch {
-            // delay os splash screen
             delay(1.seconds)
-            splashScreen?.shouldKeepOnScreen = false
-            // delay custom splash screen
             delay(3.seconds)
             splashScreen?.dismiss()
         }
     }
 
     private fun showSplash() {
-
         val exitDuration = 800L
-        val fadeDurationOffset = 200L
+        val splashBg = Color(ContextCompat.getColor(this, R.color.splash_background))
 
         splashScreen = splash {
+            exitAnimationDuration = exitDuration
+            composeViewFadeDurationOffset = 200
+            backgroundColor = splashBg
             content {
-                exitAnimationDuration = exitDuration
-                composeViewFadeDurationOffset = fadeDurationOffset
                 SplashScreenDecoratorTheme {
                     HeartBeatAnimation(
+                        backgroundColor = splashBg,
                         isVisible = isVisible.value,
-                        exitAnimationDuration = exitAnimationDuration.milliseconds,
+                        exitAnimationDuration = exitDuration.milliseconds,
                         onStartExitAnimation = { startExitAnimation() }
                     )
                 }
@@ -63,6 +63,7 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onDestroy() {
+        splashScreen?.dismiss()
         splashScreen = null
         super.onDestroy()
     }

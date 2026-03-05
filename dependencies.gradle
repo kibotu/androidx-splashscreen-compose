@@ -1,13 +1,13 @@
 ext {
     // refresh gradle dependencies: ./gradlew build --refresh-dependencies
-    minSdkVer = 21
+    minSdkVer = 23
 
     compileSdkVer = 36
     buildToolsVer = "36.0.0"
     targetSdkVer = 36
 
     // @see https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8
-    kotlinVersion = "2.2.0"
+    kotlinVersion = "2.3.0"
 
     isJitpack = System.getenv("JITPACK") == "true"
 
@@ -18,9 +18,9 @@ ext {
     println "Version Name: $version"
 
     plugins = [
-            "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin": "$kotlinVersion-2.0.2",
-            "com.vanniktech:gradle-maven-publish-plugin"                   : "0.30.0",
-            "com.android.tools.build:gradle"                               : "8.12.0",
+            "com.android.tools.build:gradle"                               : "9.1.0-rc01",
+            "com.vanniktech:gradle-maven-publish-plugin"                   : "0.36.0",
+            "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin": "2.3.6",
             "org.jetbrains.kotlin:kotlin-gradle-plugin"                    : "$kotlinVersion",
             "org.jetbrains.kotlin:compose-compiler-gradle-plugin"          : "$kotlinVersion"
     ]
@@ -29,10 +29,10 @@ ext {
             // AndroidX
             "androidx.core:core-ktx"                       : "1.16.0",
             "androidx.lifecycle:lifecycle-runtime-ktx"     : "2.9.2",
-            "androidx.activity:activity-compose"           : "1.10.1",
+            "androidx.activity:activity-compose"           : "1.12.4",
 
             // Compose
-            "androidx.compose:compose-bom"                 : "2025.07.00",
+            "androidx.compose:compose-bom"                 : "2026.02.01",
             "androidx.compose.ui:ui"                       : "",
             "androidx.compose.ui:ui-graphics"              : "",
             "androidx.compose.animation:animation"         : "",
@@ -51,7 +51,7 @@ ext {
             // Androidx SplashScreen
             // https://mvnrepository.com/artifact/androidx.core/core-splashscreen?repo=google
             // https://maven.google.com/web/index.html?q=androidx.core#androidx.core:core-splashscreen
-            "androidx.core:core-splashscreen"              : "1.0.1",
+            "androidx.core:core-splashscreen"              : "1.2.0",
     ]
 
     testLibs = [
@@ -67,7 +67,7 @@ ext {
             "androidx.test:runner"                         : "1.6.1",
             "androidx.test:rules"                          : "1.6.1",
             "org.mockito.kotlin:mockito-kotlin"            : "6.0.0",
-            "org.mockito:mockito-core"            : "5.18.0",
+            "org.mockito:mockito-core"                     : "5.18.0",
     ]
 
     desugaring = [

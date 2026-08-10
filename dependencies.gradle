@@ -2,12 +2,12 @@ ext {
     // refresh gradle dependencies: ./gradlew build --refresh-dependencies
     minSdkVer = 23
 
-    compileSdkVer = 36
-    buildToolsVer = "36.0.0"
-    targetSdkVer = 36
+    compileSdkVer = 37
+    buildToolsVer = "37.0.0"
+    targetSdkVer = 37
 
     // @see https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-stdlib-jdk8
-    kotlinVersion = "2.3.0"
+    kotlinVersion = "2.4.10"
 
     isJitpack = System.getenv("JITPACK") == "true"
 
@@ -18,37 +18,37 @@ ext {
     println "Version Name: $version"
 
     plugins = [
-            "com.android.tools.build:gradle"                               : "9.1.0",
-            "com.vanniktech:gradle-maven-publish-plugin"                   : "0.36.0",
-            "org.jetbrains.kotlin:kotlin-gradle-plugin"                    : "$kotlinVersion",
-            "org.jetbrains.kotlin:compose-compiler-gradle-plugin"          : "$kotlinVersion"
+            "com.android.tools.build:gradle"                     : "9.3.1",
+            "com.vanniktech:gradle-maven-publish-plugin"         : "0.37.0",
+            "org.jetbrains.kotlin:kotlin-gradle-plugin"          : "$kotlinVersion",
+            "org.jetbrains.kotlin:compose-compiler-gradle-plugin": "$kotlinVersion"
     ]
 
     libs = [
             // AndroidX
-            "androidx.core:core-ktx"                       : "1.17.0",
-            "androidx.lifecycle:lifecycle-runtime-ktx"     : "2.10.0",
-            "androidx.activity:activity-compose"           : "1.12.4",
+            "androidx.core:core-ktx"                  : "1.19.0",
+            "androidx.lifecycle:lifecycle-runtime-ktx": "2.11.0",
+            "androidx.activity:activity-compose"      : "1.13.0",
 
             // Compose
-            "androidx.compose:compose-bom"                 : "2026.02.01",
-            "androidx.compose.ui:ui"                       : "",
-            "androidx.compose.ui:ui-graphics"              : "",
-            "androidx.compose.animation:animation"         : "",
-            "androidx.compose.runtime:runtime"             : "",
-            "androidx.compose.ui:ui-tooling-preview"       : "",
-            "androidx.compose.material3:material3"         : "",
-            "androidx.compose.ui:ui-tooling"               : "",
-            "androidx.compose.ui:ui-test-manifest"         : "",
+            "androidx.compose:compose-bom"            : "2026.06.01",
+            "androidx.compose.ui:ui"                  : "",
+            "androidx.compose.ui:ui-graphics"         : "",
+            "androidx.compose.animation:animation"    : "",
+            "androidx.compose.runtime:runtime"        : "",
+            "androidx.compose.ui:ui-tooling-preview"  : "",
+            "androidx.compose.material3:material3"    : "",
+            "androidx.compose.ui:ui-tooling"          : "",
+            "androidx.compose.ui:ui-test-manifest"    : "",
 
             // Androidx SplashScreen
             // https://mvnrepository.com/artifact/androidx.core/core-splashscreen?repo=google
             // https://maven.google.com/web/index.html?q=androidx.core#androidx.core:core-splashscreen
-            "androidx.core:core-splashscreen"              : "1.2.0",
+            "androidx.core:core-splashscreen"         : "1.2.0",
     ]
 
     testLibs = [
-            "junit:junit"                                  : "4.13.2",
+            "junit:junit": "4.13.2",
     ]
 
     desugaring = [
